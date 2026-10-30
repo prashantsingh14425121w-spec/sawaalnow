@@ -1,0 +1,27 @@
+:root{--bg:#f6f8fb;--card:#fff;--ink:#14213d;--mut:#5b6b85;--pri:#173f73;--acc:#d9a441;--ok:#1b7f4b;--warn:#b3261e;--bd:#dbe3ee;--onpri:#fff}
+@media (prefers-color-scheme:dark){:root{--bg:#0d1420;--card:#16202f;--ink:#eef3fa;--mut:#9fb0c8;--pri:#5b9bd5;--acc:#e8b954;--ok:#5fd08e;--warn:#ff8a80;--bd:#2a3850;--onpri:#0d1420}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.5 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:720px;margin:0 auto;padding:16px}
+h1{font-size:26px;margin:4px 0}
+.sub{color:var(--mut);margin:0 0 12px;font-size:16px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+select,textarea,input{font:inherit;color:var(--ink);background:var(--card);border:2px solid var(--bd);border-radius:12px;padding:12px;width:100%}
+select{width:auto}
+textarea{resize:vertical;min-height:64px}
+button{font:inherit;cursor:pointer;border:0;border-radius:14px;padding:14px 18px;min-height:52px;background:var(--pri);color:var(--onpri);font-weight:600}
+button.sec{background:transparent;color:var(--pri);border:2px solid var(--pri)}
+button:disabled{opacity:.5;cursor:default}
+.mic{width:96px;height:96px;border-radius:50%;font-size:40px;padding:0;background:var(--acc);color:#14213d;flex:none}
+.mic.on{animation:p 1s infinite}
+@keyframes p{50%{transform:scale(1.08)}}
+.chips{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:12px 0}
+.chip{background:var(--card);color:var(--ink);border:2px solid var(--bd);text-align:left;font-weight:500}
+.card{background:var(--card);border:2px solid var(--bd);border-radius:16px;padding:14px;margin:12px 0}
+.q{color:var(--mut);font-size:15px;margin:0 0 6px}
+.a{font-size:22px;margin:0 0 10px}
+.src{display:inline-block;font-size:14px;background:var(--bg);border:1px solid var(--bd);border-radius:999px;padding:4px 10px;color:var(--ok)}
+.warn{color:var(--warn)}
+.box{margin-top:10px;background:var(--bg);border:2px dashed var(--bd);border-radius:12px;padding:10px;font-size:15px}
+.lbl{font-size:14px;color:var(--mut);display:block;margin:8px 0 4px}
+details{margin-top:16px;color:var(--mut);font-size:15px}
