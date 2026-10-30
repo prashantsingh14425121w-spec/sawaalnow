@@ -142,7 +142,7 @@
 <div class="flex items-center gap-3">
 <div class="flex items-center gap-2">
 <!-- Required Logo Image -->
-<img alt="SawaalNow College Helpdesk Logo" class="h-8 md:h-9 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1VzZIIeTsbrH-XEQwJfFAz5AQ0EA7rNyp453jmN_5mQmGqQ2wFRgUDG-HkTB59WVmg5EdM44RuMT5f83_WL14yERQvr0g6OykOr0wW5rsHLiMeRupOhJTpBCdt5iPKSk4oamgLKddNJwMTS3LQUEDhcekhZ_CUKwOhSj2vjTiZQozpEGIshUOb3xFjxC1V2zfwU6hj2MQ3p34Op10-SXS3p_dW_nLCanAJ_-U5VTlw"/>
+<svg class="h-9 w-9 shrink-0" viewBox="0 0 36 36" role="img" aria-label="SawaalNow logo" xmlns="http://www.w3.org/2000/svg"><rect width="36" height="36" rx="9" fill="#175CD3"/><rect x="9" y="9" width="18" height="18" rx="4" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M13.5 18.4l3.3 3.3 5.9-6.4" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
 <span class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight hidden sm:inline-block">SawaalNow</span>
 </div>
 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-caption font-caption bg-secondary-fixed text-on-secondary-fixed border border-secondary-fixed-dim font-medium">
@@ -562,9 +562,10 @@
     var sp = d.querySelector('.spk'); if (sp) sp.onclick = function () { window.speakText(o.answer, o.lang); };
     return d;
   }
-  function errCard(q) {
+  function errCard(q, why) {
+    var hint = why === 'missing_key' ? 'The server has no GEMINI_API_KEY set. Add it in .env.local (or Vercel Environment Variables) and restart/redeploy.' : (why ? 'Reason: ' + why : 'Network problem. Check your connection.');
     var d = document.createElement('div'); d.className = 'flex flex-col items-start';
-    d.innerHTML = '<div class="max-w-[95%] sm:max-w-[85%] bg-surface-container-lowest border border-red-300 rounded-xl rounded-bl-[4px] p-4 elevation-1"><p class="font-body-md text-body-md text-on-surface">Something went wrong reaching the AI. Your question is saved.</p><button class="mt-3 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary-container text-white font-label-md text-label-md font-semibold"><span class="material-symbols-outlined text-[18px]">refresh</span><span>Retry</span></button></div>';
+    d.innerHTML = '<div class="max-w-[95%] sm:max-w-[85%] bg-surface-container-lowest border border-red-300 rounded-xl rounded-bl-[4px] p-4 elevation-1"><p class="font-body-md text-body-md text-on-surface">Something went wrong reaching the AI. Your question is saved.</p><p class="text-caption text-tertiary mt-1">' + esc(hint) + '</p><button class="mt-3 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary-container text-white font-label-md text-label-md font-semibold"><span class="material-symbols-outlined text-[18px]">refresh</span><span>Retry</span></button></div>';
     d.querySelector('button').onclick = function () { d.remove(); window.sendMessage(q); };
     return d;
   }
@@ -580,9 +581,9 @@
     loader.classList.remove('hidden');
     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     fetch('/api/ask', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question: val }) })
-      .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+      .then(function (r) { if (!r.ok) return r.json().then(function (j) { throw new Error(j.error || 'error'); }, function () { throw new Error('server_error'); }); return r.json(); })
       .then(function (o) { stream.insertBefore(botCard(o, val), loader); if (o.found) window.speakText(o.answer, o.lang); })
-      .catch(function () { stream.insertBefore(errCard(val), loader); })
+      .catch(function (e) { stream.insertBefore(errCard(val, e && e.message), loader); })
       .then(function () { loader.classList.add('hidden'); busy = false; window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); });
   };
 

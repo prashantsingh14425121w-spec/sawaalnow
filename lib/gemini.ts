@@ -14,7 +14,11 @@ export async function gemini(system: string, user: string): Promise<string> {
       }),
     }
   );
-  if (!res.ok) throw new Error("gemini_" + res.status);
+  if (!res.ok) {
+    let d = "";
+    try { d = (await res.json())?.error?.message ?? ""; } catch {}
+    throw new Error("gemini_" + res.status + (d ? ": " + d.slice(0, 160) : ""));
+  }
   const j = await res.json();
   return j?.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
 }

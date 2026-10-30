@@ -34,6 +34,9 @@ export async function POST(req: Request) {
       source: found && src ? { id: src.id, title: src.title, date: src.date, text: src.text } : null,
     });
   } catch (e) {
-    return NextResponse.json({ error: "upstream" }, { status: 502 });
+    const msg = e instanceof Error ? e.message : "unknown";
+    console.error("[ask]", msg);
+    if (msg === "missing_key") return NextResponse.json({ error: "missing_key" }, { status: 500 });
+    return NextResponse.json({ error: msg }, { status: 502 });
   }
 }
