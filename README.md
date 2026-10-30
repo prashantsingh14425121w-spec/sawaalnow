@@ -2,6 +2,11 @@
 
 Multilingual AI helpdesk agent (build#thon 2026, Idea 1). Answers only from verified circulars, cites the source, speaks and listens, falls back to SMS-style short answers and a human handoff.
 
+## Structure
+- `public/chat.html` is the exact Stitch design, wired to the real AI (`/` rewrites to it).
+- `public/*.html` are the other Stitch screens, kept as designed (static demo data).
+- `app/api/ask` and `app/api/handoff` are the server routes.
+
 ## Run
 ```bash
 npm install

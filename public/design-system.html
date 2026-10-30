@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SawaalNow — Visual Design System &amp; Component Specification</title>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config verbatim from instructions -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-lowest": "#ffffff",
+            "tertiary-container": "#5a6570",
+            "primary": "#0045a9",
+            "inverse-surface": "#2d3133",
+            "primary-fixed": "#dae2ff",
+            "background": "#f7f9fc",
+            "on-tertiary": "#ffffff",
+            "on-background": "#191c1e",
+            "on-primary-fixed-variant": "#0040a0",
+            "primary-fixed-dim": "#b1c5ff",
+            "secondary": "#525e7d",
+            "secondary-fixed": "#d9e2ff",
+            "error-container": "#ffdad6",
+            "on-primary-container": "#d7e0ff",
+            "surface-variant": "#e0e3e6",
+            "outline": "#737785",
+            "error": "#ba1a1a",
+            "on-tertiary-fixed-variant": "#3d4852",
+            "surface-tint": "#0957ce",
+            "tertiary-fixed-dim": "#bdc8d4",
+            "on-secondary-container": "#525f7e",
+            "on-surface": "#191c1e",
+            "outline-variant": "#c3c6d6",
+            "on-primary-fixed": "#001847",
+            "tertiary-fixed": "#d9e4f0",
+            "on-error-container": "#93000a",
+            "on-tertiary-container": "#d7e2ef",
+            "on-secondary-fixed-variant": "#3a4664",
+            "on-primary": "#ffffff",
+            "secondary-container": "#cdd9fe",
+            "surface-container-high": "#e6e8eb",
+            "on-secondary-fixed": "#0d1b36",
+            "inverse-primary": "#b1c5ff",
+            "primary-container": "#175cd3",
+            "surface": "#f7f9fc",
+            "surface-container-low": "#f2f4f7",
+            "surface-bright": "#f7f9fc",
+            "surface-container": "#eceef1",
+            "on-tertiary-fixed": "#121d26",
+            "surface-container-highest": "#e0e3e6",
+            "inverse-on-surface": "#eff1f4",
+            "on-secondary": "#ffffff",
+            "on-error": "#ffffff",
+            "tertiary": "#424d57",
+            "secondary-fixed-dim": "#b9c6ea",
+            "surface-dim": "#d8dadd",
+            "on-surface-variant": "#424654"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xs": "0.25rem",
+            "gutter": "1rem",
+            "margin": "1rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2rem",
+            "gutter-desktop": "1.5rem",
+            "margin-desktop": "2rem",
+            "space-md": "0.75rem",
+            "margin-tablet": "1.5rem",
+            "space-base": "1rem",
+            "space-2xl": "3rem",
+            "space-sm": "0.5rem"
+          },
+          "fontFamily": {
+            "body-lg": ["Inter"],
+            "title-md": ["Inter"],
+            "headline-md": ["Inter"],
+            "headline-xl": ["Inter"],
+            "label-sm": ["Inter"],
+            "headline-lg": ["Inter"],
+            "headline-xl-mobile": ["Inter"],
+            "caption": ["Inter"],
+            "body-md-medium": ["Inter"],
+            "body-md": ["Inter"],
+            "label-md": ["Inter"]
+          },
+          "fontSize": {
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "headline-xl": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+            "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "headline-xl-mobile": ["26px", { "lineHeight": "34px", "fontWeight": "700" }],
+            "caption": ["11px", { "lineHeight": "14px", "fontWeight": "500" }],
+            "body-md-medium": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "label-md": ["13px", { "lineHeight": "18px", "fontWeight": "500" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .shadow-level-1 {
+      box-shadow: 0 1px 3px rgba(16, 24, 40, 0.06), 0 1px 2px rgba(16, 24, 40, 0.04);
+    }
+    .shadow-level-2 {
+      box-shadow: 0 4px 12px rgba(16, 24, 40, 0.08), 0 2px 4px rgba(16, 24, 40, 0.04);
+    }
+    @keyframes academicPulse {
+      0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+      40% { opacity: 1; transform: scale(1.1); }
+    }
+    .dot-pulse-1 { animation: academicPulse 1.4s infinite ease-in-out; }
+    .dot-pulse-2 { animation: academicPulse 1.4s infinite ease-in-out 0.2s; }
+    .dot-pulse-3 { animation: academicPulse 1.4s infinite ease-in-out 0.4s; }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md antialiased min-h-screen pb-20 md:pb-12">
+<!-- TopAppBar Component (from Shared Components JSON & Style Guidance) -->
+<header class="bg-surface-container-lowest dark:bg-inverse-surface border-b border-surface-variant dark:border-outline sticky top-0 z-40">
+<div class="flex justify-between items-center w-full px-4 md:px-8 max-w-7xl mx-auto h-16">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary dark:text-inverse-primary" data-icon="forum">forum</span>
+<span class="font-headline-md text-headline-md font-bold text-on-surface dark:text-inverse-on-surface tracking-tight">SawaalNow</span>
+<span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded text-caption font-caption bg-secondary-container text-on-secondary-container">
+          Design System v2.6
+        </span>
+</div>
+<div class="flex items-center gap-4">
+<!-- Multilingual Top Bar Pill Trigger -->
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-surface-variant text-label-md font-label-md text-on-surface hover:bg-surface-container-low transition-colors duration-150">
+<span class="material-symbols-outlined text-outline" data-icon="translate" style="font-size: 18px;">translate</span>
+<span>English / हिंदी</span>
+<span class="material-symbols-outlined text-outline" data-icon="expand_more" style="font-size: 16px;">expand_more</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Grid Frame: Persistent Navigation Drawer on Desktop + Canvas -->
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row min-h-[calc(100vh-4rem)]">
+<!-- NavigationDrawer Component (Desktop Persistent Rail as specified in Shared JSON) -->
+<aside class="hidden md:flex flex-col h-full w-72 p-4 shrink-0 bg-surface-container-lowest dark:bg-inverse-surface border-r border-surface-variant dark:border-outline">
+<!-- Header Profile Section -->
+<div class="mb-6 p-3 rounded-lg bg-surface-container-low border border-surface-variant">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary-container text-on-primary flex items-center justify-center font-bold font-title-md">
+            SN
+          </div>
+<div class="overflow-hidden">
+<h2 class="font-title-md text-title-md font-bold text-on-surface truncate">SawaalNow Academic Portal</h2>
+<p class="font-caption text-caption text-on-surface-variant truncate">Multilingual Support Assistant</p>
+</div>
+</div>
+<div class="mt-2.5 pt-2 border-t border-surface-variant flex items-center justify-between text-caption font-caption text-secondary">
+<span>Verified Student v2.4</span>
+<span class="inline-block w-2 h-2 rounded-full bg-emerald-600"></span>
+</div>
+</div>
+<!-- Drawer Nav Links -->
+<div class="space-y-1 text-label-md font-label-md">
+<a class="flex items-center gap-3 bg-secondary-container dark:bg-secondary text-primary dark:text-inverse-primary font-semibold rounded-lg px-3 py-2" href="#overview">
+<span class="material-symbols-outlined" data-icon="account_balance">account_balance</span>
+<span>Admissions &amp; Fees</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-surface-variant rounded-lg px-3 py-2 font-medium hover:bg-surface-container-low dark:hover:bg-tertiary-container hover:text-on-surface transition-all duration-150" href="#tokens">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+<span>Academic Calendar</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-surface-variant rounded-lg px-3 py-2 font-medium hover:bg-surface-container-low dark:hover:bg-tertiary-container hover:text-on-surface transition-all duration-150" href="#components">
+<span class="material-symbols-outlined" data-icon="apartment">apartment</span>
+<span>Hostel &amp; Housing</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-surface-variant rounded-lg px-3 py-2 font-medium hover:bg-surface-container-low dark:hover:bg-tertiary-container hover:text-on-surface transition-all duration-150" href="#conversational">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+<span>Examinations</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-surface-variant rounded-lg px-3 py-2 font-medium hover:bg-surface-container-low dark:hover:bg-tertiary-container hover:text-on-surface transition-all duration-150" href="#escalation">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+<span>Registrar Escalation</span>
+</a>
+</div>
+<!-- Specs Meta Card -->
+<div class="mt-auto p-3.5 rounded-lg border border-surface-variant bg-surface-container-low text-caption font-caption text-on-surface-variant space-y-1.5">
+<div class="font-bold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary" data-icon="verified" style="font-size: 16px;">verified</span>
+          Institutional Standard
+        </div>
+<p class="leading-relaxed">WCAG 2.1 AAA Compliant, zero generative hallucination buffer, dual verification check.</p>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 px-4 md:px-8 py-6 md:py-8 max-w-5xl mx-auto space-y-10">
+<!-- SECTION 1: Brand Identity & Overview -->
+<section class="bg-surface-container-lowest border border-surface-variant rounded-xl p-6 md:p-8 shadow-level-1" id="overview">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-surface-variant">
+<div class="space-y-3">
+<div class="flex items-center gap-3 flex-wrap">
+<!-- Provided Image 1: Logo -->
+<img alt="SawaalNow Logo" class="h-10 md:h-12 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WWFfKzfBtCfskOunUMTcYisQVAoaUgDxLDaNw-WLE01ai9ePU8GMm_kRxHMQmOzGcagXCwOi40cRIRgCTvEJIYMXVDLsRkp441KvnI6wwsmXCh9Mu-W_iak4mfs99RNKHnz8o5ewnpEAvenPmpQGu_cBY7Hurp65SoladC9cNXJf5Sh8x6b71GMVu24WMoPG7G-XOYCYTZcwIrFHb73BzQDmkyzY37eQ-maJJpEw"/>
+<span class="px-2.5 py-1 rounded-md text-caption font-caption font-semibold bg-secondary-container text-on-secondary-fixed-variant tracking-wider">
+                Buildathon 2026 Idea 1
+              </span>
+</div>
+<p class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">
+              “Every question answered, the moment it's asked.”
+            </p>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+              SawaalNow is a real-time, multilingual, institutionally verified academic support agent designed for Indian higher education campuses. It provides verified regulatory, admission, hostel, and examination intelligence directly from official gazettes and portals.
+            </p>
+</div>
+<!-- Status Stamp -->
+<div class="flex md:flex-col items-center md:items-end gap-2 text-right">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-md bg-emerald-50 text-emerald-800 text-label-sm font-label-sm border border-emerald-200">
+<span class="material-symbols-outlined text-emerald-700" data-icon="check_circle" style="font-size: 16px;">check_circle</span>
+              Institutional Ready
+            </span>
+<span class="font-caption text-caption text-secondary">Spec Build: v2.6.4 • 2026</span>
+</div>
+</div>
+<!-- Personality Pillars -->
+<div class="mt-6">
+<h3 class="font-title-md text-title-md font-bold text-on-surface mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="stars" style="font-size: 20px;">stars</span>
+            Core Personality Pillars
+          </h3>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+<div class="p-3.5 rounded-lg bg-surface-container-low border border-surface-variant text-center">
+<span class="material-symbols-outlined text-primary mb-1" data-icon="gavel">gavel</span>
+<p class="font-title-md text-title-md text-on-surface font-semibold">Trustworthy</p>
+<p class="font-caption text-caption text-on-surface-variant mt-0.5">Dual-cited official facts only</p>
+</div>
+<div class="p-3.5 rounded-lg bg-surface-container-low border border-surface-variant text-center">
+<span class="material-symbols-outlined text-primary mb-1" data-icon="forum">forum</span>
+<p class="font-title-md text-title-md text-on-surface font-semibold">Approachable</p>
+<p class="font-caption text-caption text-on-surface-variant mt-0.5">Plain campus phrasing</p>
+</div>
+<div class="p-3.5 rounded-lg bg-surface-container-low border border-surface-variant text-center">
+<span class="material-symbols-outlined text-primary mb-1" data-icon="public">public</span>
+<p class="font-title-md text-title-md text-on-surface font-semibold">Inclusive</p>
+<p class="font-caption text-caption text-on-surface-variant mt-0.5">8+ Indic script readiness</p>
+</div>
+<div class="p-3.5 rounded-lg bg-surface-container-low border border-surface-variant text-center">
+<span class="material-symbols-outlined text-primary mb-1" data-icon="bolt">bolt</span>
+<p class="font-title-md text-title-md text-on-surface font-semibold">Fast</p>
+<p class="font-caption text-caption text-on-surface-variant mt-0.5">&lt;350ms cached indexing</p>
+</div>
+<div class="p-3.5 rounded-lg bg-surface-container-low border border-surface-variant text-center col-span-2 sm:col-span-1">
+<span class="material-symbols-outlined text-primary mb-1" data-icon="workspace_premium">workspace_premium</span>
+<p class="font-title-md text-title-md text-on-surface font-semibold">Professional</p>
+<p class="font-caption text-caption text-on-surface-variant mt-0.5">Registrar desk protocol</p>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: Color Tokens & Semantic Hierarchy -->
+<section class="bg-surface-container-lowest border border-surface-variant rounded-xl p-6 md:p-8 shadow-level-1" id="tokens">
+<div class="mb-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="palette">palette</span>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface">Color Tokens &amp; Semantic Hierarchy</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+            Engineered for high institutional legibility, high sunlight outdoor viewability on student mobile screens, and strict WCAG 2.1 AAA contrast targets.
+          </p>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3.5">
+<!-- Swatch 1: Primary -->
+<div class="rounded-lg border border-surface-variant overflow-hidden bg-surface-container-lowest">
+<div class="h-16 w-full bg-[#175CD3] flex items-end p-2">
+<span class="text-white font-caption text-caption font-semibold">Primary Action</span>
+</div>
+<div class="p-3 space-y-1">
+<div class="flex justify-between items-center">
+<span class="font-title-md text-title-md font-bold text-on-surface">#175CD3</span>
+<span class="text-caption font-caption px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">AAA 7.4:1</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">Core brand blue, triggers, focused strokes</p>
+</div>
+</div>
+<!-- Swatch 2: Navy Institutional -->
+<div class="rounded-lg border border-surface-variant overflow-hidden bg-surface-container-lowest">
+<div class="h-16 w-full bg-[#14213D] flex items-end p-2">
+<span class="text-white font-caption text-caption font-semibold">Navy Institutional</span>
+</div>
+<div class="p-3 space-y-1">
+<div class="flex justify-between items-center">
+<span class="font-title-md text-title-md font-bold text-on-surface">#14213D</span>
+<span class="text-caption font-caption px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">AAA 14.8:1</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">User chat speech bubbles, primary anchors</p>
+</div>
+</div>
+<!-- Swatch 3: Light Blue Container -->
+<div class="rounded-lg border border-surface-variant overflow-hidden bg-surface-container-lowest">
+<div class="h-16 w-full bg-[#E7F2FF] flex items-end p-2">
+<span class="text-[#175CD3] font-caption text-caption font-bold">Light Blue Tint</span>
+</div>
+<div class="p-3 space-y-1">
+<div class="flex justify-between items-center">
+<span class="font-title-md text-title-md font-bold text-on-surface">#E7F2FF</span>
+<span class="text-caption font-caption px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">AAA on #14213D</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">Suggestion chips, focus halos, pill highlights</p>
+</div>
+</div>
+<!-- Swatch 4: Background Canvas -->
+<div class="rounded-lg border border-surface-variant overflow-hidden bg-surface-container-lowest">
+<div class="h-16 w-full bg-[#F7F9FC] flex items-end p-2 border-b border-surface-variant">
+<span class="text-on-surface font-caption text-caption font-semibold">Canvas Background</span>
+</div>
+<div class="p-3 space-y-1">
+<div class="flex justify-between items-center">
+<span class="font-title-md text-title-md font-bold text-on-surface">#F7F9FC</span>
+<span class="text-caption font-caption px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">Base Tier</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">App backdrop, neutral low-strain canvas</p>
+</div>
+</div>
+<!-- Swatch 5: Surface Container -->
+<div class="rounded-lg border border-surface-variant overflow-hidden bg-surface-container-lowest">
+<div class="h-16 w-full bg-[#FFFFFF] flex items-end p-2 border-b border-surface-variant">
+<span class="text-on-surface font-caption text-caption font-semibold">Surface Pure</span>
+</div>
+<div class="p-3 space-y-1">
+<div class="flex justify-between items-center">
+<span class="font-title-md text-title-md font-bold text-on-surface">#FFFFFF</span>
+<span class="text-caption font-caption px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">Card Tier</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">Cards, dialog cards, system agent message cards</p>
+</div>
+</div>
+<!-- Swatch 6: Structural Border -->
+<div class="rounded-lg border border-surface-variant overflow-hidden bg-surface-container-lowest">
+<div class="h-16 w-full bg-[#DCE3ED] flex items-end p-2">
+<span class="text-on-surface font-caption text-caption font-semibold">Border Line</span>
+</div>
+<div class="p-3 space-y-1">
+<div class="flex justify-between items-center">
+<span class="font-title-md text-title-md font-bold text-on-surface">#DCE3ED</span>
+<span class="text-caption font-caption px-1.5 py-0.5 rounded bg-blue-100 text-blue-800 font-bold">Structural</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">Structural dividers, input outlines, cards</p>
+</div>
+</div>
+<!-- Swatch 7: Main Text -->
+<div class="rounded-lg border border-surface-variant overflow-hidden bg-surface-container-lowest">
+<div class="h-16 w-full bg-[#1F2937] flex items-end p-2">
+<span class="text-white font-caption text-caption font-semibold">Main Text</span>
+</div>
+<div class="p-3 space-y-1">
+<div class="flex justify-between items-center">
+<span class="font-title-md text-title-md font-bold text-on-surface">#1F2937</span>
+<span class="text-caption font-caption px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">AAA 14.2:1</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">Primary headings, high-contrast paragraphs</p>
+</div>
+</div>
+<!-- Swatch 8: Secondary Text -->
+<div class="rounded-lg border border-surface-variant overflow-hidden bg-surface-container-lowest">
+<div class="h-16 w-full bg-[#667085] flex items-end p-2">
+<span class="text-white font-caption text-caption font-semibold">Secondary Text</span>
+</div>
+<div class="p-3 space-y-1">
+<div class="flex justify-between items-center">
+<span class="font-title-md text-title-md font-bold text-on-surface">#667085</span>
+<span class="text-caption font-caption px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">AA 4.8:1</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">Timestamps, meta subtitles, placeholder cues</p>
+</div>
+</div>
+<!-- Swatch 9: Success Verified -->
+<div class="rounded-lg border border-surface-variant overflow-hidden bg-surface-container-lowest">
+<div class="h-16 w-full bg-[#15803D] flex items-end p-2">
+<span class="text-white font-caption text-caption font-semibold">Success / Verified</span>
+</div>
+<div class="p-3 space-y-1">
+<div class="flex justify-between items-center">
+<span class="font-title-md text-title-md font-bold text-on-surface">#15803D</span>
+<span class="text-caption font-caption px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">AAA 5.2:1</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">Official verified citation borders &amp; badges</p>
+</div>
+</div>
+<!-- Swatch 10: Warning / Escalation -->
+<div class="rounded-lg border border-surface-variant overflow-hidden bg-surface-container-lowest">
+<div class="h-16 w-full bg-[#B45309] flex items-end p-2">
+<span class="text-white font-caption text-caption font-semibold">Warning / Escalated</span>
+</div>
+<div class="p-3 space-y-1">
+<div class="flex justify-between items-center">
+<span class="font-title-md text-title-md font-bold text-on-surface">#B45309</span>
+<span class="text-caption font-caption px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">AAA 4.6:1</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">Pending registrar triage notifications</p>
+</div>
+</div>
+<!-- Swatch 11: Error Alert -->
+<div class="rounded-lg border border-surface-variant overflow-hidden bg-surface-container-lowest">
+<div class="h-16 w-full bg-[#B42318] flex items-end p-2">
+<span class="text-white font-caption text-caption font-semibold">Error Critical</span>
+</div>
+<div class="p-3 space-y-1">
+<div class="flex justify-between items-center">
+<span class="font-title-md text-title-md font-bold text-on-surface">#B42318</span>
+<span class="text-caption font-caption px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">AAA 4.9:1</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">Validation blocks &amp; directory connection drops</p>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: Typography & Spacing Scales -->
+<section class="bg-surface-container-lowest border border-surface-variant rounded-xl p-6 md:p-8 shadow-level-1" id="scales">
+<div class="mb-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="format_size">format_size</span>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface">Typography, Spacing &amp; Elevation</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+            Universal typeface: <strong>Inter</strong>. Formatted strictly with responsive paired tokens.
+          </p>
+</div>
+<!-- Typography Showcase -->
+<div class="space-y-4 mb-8">
+<div class="p-4 rounded-lg bg-surface-container-low border border-surface-variant flex flex-col md:flex-row md:items-center justify-between gap-2">
+<div>
+<span class="text-caption font-caption text-secondary uppercase font-bold">Page Title (headline-xl)</span>
+<p class="font-headline-xl text-headline-xl font-bold text-on-surface">
+                Campus Knowledge Engine 2026
+              </p>
+</div>
+<span class="text-caption font-caption text-on-surface-variant shrink-0">32px / 40px line-height • 700 bold</span>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-low border border-surface-variant flex flex-col md:flex-row md:items-center justify-between gap-2">
+<div>
+<span class="text-caption font-caption text-secondary uppercase font-bold">Section Heading (headline-lg / headline-md)</span>
+<p class="font-headline-lg text-headline-lg font-bold text-on-surface">
+                Academic Regulations &amp; Ordinance
+              </p>
+</div>
+<span class="text-caption font-caption text-on-surface-variant shrink-0">24px / 32px line-height • 600 semibold</span>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-low border border-surface-variant flex flex-col md:flex-row md:items-center justify-between gap-2">
+<div>
+<span class="text-caption font-caption text-secondary uppercase font-bold">Body Text (body-lg / body-md)</span>
+<p class="font-body-lg text-body-lg text-on-surface">
+                Students may apply for the semester re-evaluation within 14 working days of the provisional grade sheet publication.
+              </p>
+</div>
+<span class="text-caption font-caption text-on-surface-variant shrink-0">16px / 24px • 400 normal</span>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-low border border-surface-variant flex flex-col md:flex-row md:items-center justify-between gap-2">
+<div>
+<span class="text-caption font-caption text-secondary uppercase font-bold">Small Label / Caption (label-md / caption)</span>
+<p class="font-label-md text-label-md font-medium text-on-surface-variant">
+                Official Gazette Ref: #ORD-2025-IV-A • Dean of Academic Operations
+              </p>
+</div>
+<span class="text-caption font-caption text-on-surface-variant shrink-0">12-13px / 18px • 500 medium</span>
+</div>
+</div>
+<!-- Spacing Scale Pill Bar -->
+<div class="mb-8">
+<h3 class="font-title-md text-title-md font-bold text-on-surface mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="straighten" style="font-size: 18px;">straighten</span>
+            Cadence Spacing Scale
+          </h3>
+<div class="flex flex-wrap items-center gap-2">
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container border border-surface-variant text-label-sm font-label-sm">
+<span class="w-1 h-3 bg-primary rounded-full"></span>
+<strong>4px</strong>
+<span class="text-secondary">(space-xs)</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container border border-surface-variant text-label-sm font-label-sm">
+<span class="w-2 h-3 bg-primary rounded-full"></span>
+<strong>8px</strong>
+<span class="text-secondary">(space-sm)</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container border border-surface-variant text-label-sm font-label-sm">
+<span class="w-3 h-3 bg-primary rounded-full"></span>
+<strong>12px</strong>
+<span class="text-secondary">(space-md)</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary-container text-on-secondary-container border border-surface-variant text-label-sm font-label-sm">
+<span class="w-4 h-3 bg-primary rounded-full"></span>
+<strong>16px</strong>
+<span>(space-base)</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container border border-surface-variant text-label-sm font-label-sm">
+<span class="w-6 h-3 bg-primary rounded-full"></span>
+<strong>24px</strong>
+<span class="text-secondary">(space-lg)</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container border border-surface-variant text-label-sm font-label-sm">
+<span class="w-8 h-3 bg-primary rounded-full"></span>
+<strong>32px</strong>
+<span class="text-secondary">(space-xl)</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container border border-surface-variant text-label-sm font-label-sm">
+<span class="w-12 h-3 bg-primary rounded-full"></span>
+<strong>48px</strong>
+<span class="text-secondary">(space-2xl)</span>
+</div>
+</div>
+</div>
+<!-- Radii & Elevation Token Breakdown -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Radii Matrix -->
+<div class="p-4 rounded-xl border border-surface-variant bg-surface-container-low space-y-3">
+<h4 class="font-title-md text-title-md font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="rounded_corner" style="font-size: 18px;">rounded_corner</span>
+              Strict Radii Tokens
+            </h4>
+<div class="grid grid-cols-3 gap-2.5 text-center">
+<div class="p-2.5 bg-surface-container-lowest border border-surface-variant" style="border-radius: 12px;">
+<span class="font-title-md text-title-md font-bold text-primary">12px</span>
+<p class="font-caption text-caption text-on-surface-variant">Cards &amp; Modals</p>
+</div>
+<div class="p-2.5 bg-surface-container-lowest border border-surface-variant" style="border-radius: 10px;">
+<span class="font-title-md text-title-md font-bold text-primary">10px</span>
+<p class="font-caption text-caption text-on-surface-variant">Inputs &amp; Buttons</p>
+</div>
+<div class="p-2.5 bg-surface-container-lowest border border-surface-variant" style="border-radius: 8px;">
+<span class="font-title-md text-title-md font-bold text-primary">8px</span>
+<p class="font-caption text-caption text-on-surface-variant">Chips &amp; Badges</p>
+</div>
+</div>
+</div>
+<!-- Elevation Restrained Tokens -->
+<div class="p-4 rounded-xl border border-surface-variant bg-surface-container-low space-y-3">
+<h4 class="font-title-md text-title-md font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="layers" style="font-size: 18px;">layers</span>
+              Restrained Ambient Elevation
+            </h4>
+<div class="grid grid-cols-2 gap-2.5">
+<div class="p-3 bg-surface-container-lowest border border-surface-variant rounded-lg shadow-level-1">
+<span class="font-title-md text-title-md font-bold text-on-surface">Level 1: Subtle</span>
+<p class="font-caption text-caption text-on-surface-variant mt-1">0 1px 3px rgba(16,24,40,0.06) Cards &amp; Lists</p>
+</div>
+<div class="p-3 bg-surface-container-lowest border border-surface-variant rounded-lg shadow-level-2">
+<span class="font-title-md text-title-md font-bold text-on-surface">Level 2: Overlay</span>
+<p class="font-caption text-caption text-on-surface-variant mt-1">0 4px 12px rgba(16,24,40,0.08) Modals &amp; Menus</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 4: Reusable Button Matrix & Form Controls -->
+<section class="bg-surface-container-lowest border border-surface-variant rounded-xl p-6 md:p-8 shadow-level-1" id="components">
+<div class="mb-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="smart_button">smart_button</span>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface">Button Matrix &amp; Form Controls</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+            Componentized controls standardized to exact 10px corner curvature and 40-44px heights for mobile tap fidelity.
+          </p>
+</div>
+<!-- Button Matrix -->
+<div class="mb-8">
+<h3 class="font-title-md text-title-md font-bold text-on-surface mb-3">Button Variants (Height: 40px, Radius: 10px)</h3>
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+<!-- Primary -->
+<button class="h-10 px-4 rounded-[10px] bg-[#175CD3] text-white font-title-md text-title-md flex items-center justify-center gap-2 hover:bg-[#144FB8] transition-colors focus:ring-4 focus:ring-[#E7F2FF] outline-none">
+<span class="material-symbols-outlined" data-icon="send" style="font-size: 18px;">send</span>
+              Primary
+            </button>
+<!-- Secondary -->
+<button class="h-10 px-4 rounded-[10px] bg-[#14213D] text-white font-title-md text-title-md flex items-center justify-center gap-2 hover:bg-[#0F172A] transition-colors focus:ring-4 focus:ring-slate-200 outline-none">
+<span class="material-symbols-outlined" data-icon="check" style="font-size: 18px;">check</span>
+              Secondary
+            </button>
+<!-- Outline -->
+<button class="h-10 px-4 rounded-[10px] bg-white border border-[#DCE3ED] text-[#1F2937] font-title-md text-title-md flex items-center justify-center gap-2 hover:bg-[#F7F9FC] hover:border-[#667085] transition-colors focus:ring-4 focus:ring-slate-100 outline-none">
+<span class="material-symbols-outlined" data-icon="download" style="font-size: 18px;">download</span>
+              Outline
+            </button>
+<!-- Ghost -->
+<button class="h-10 px-4 rounded-[10px] bg-transparent text-[#175CD3] font-title-md text-title-md flex items-center justify-center gap-2 hover:bg-[#E7F2FF] transition-colors focus:ring-4 focus:ring-blue-50 outline-none">
+<span class="material-symbols-outlined" data-icon="open_in_new" style="font-size: 18px;">open_in_new</span>
+              Ghost
+            </button>
+<!-- Disabled -->
+<button class="h-10 px-4 rounded-[10px] bg-surface-container text-outline opacity-60 font-title-md text-title-md flex items-center justify-center gap-2 cursor-not-allowed border border-surface-variant" disabled="">
+<span class="material-symbols-outlined" data-icon="block" style="font-size: 18px;">block</span>
+              Disabled
+            </button>
+</div>
+</div>
+<!-- Form Controls & Interactive States -->
+<div class="space-y-4">
+<h3 class="font-title-md text-title-md font-bold text-on-surface">Interactive Form Field States</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Default Input -->
+<div class="space-y-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold flex items-center justify-between">
+<span>Default Query Input</span>
+<span class="text-caption font-caption text-secondary">Normal</span>
+</label>
+<div class="relative">
+<input class="w-full h-11 px-3.5 rounded-[10px] bg-white border border-[#DCE3ED] text-[#1F2937] placeholder-[#667085] font-body-md text-body-md focus:border-[#175CD3] focus:ring-2 focus:ring-[#175CD3]/20 transition-all outline-none" placeholder="e.g. When is the refund deadline?" type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-3 text-[#667085]" data-icon="search" style="font-size: 20px;">search</span>
+</div>
+<p class="font-caption text-caption text-[#667085]">Ask in English, Hindi, or Hinglish.</p>
+</div>
+<!-- Active / Focused Input -->
+<div class="space-y-1.5">
+<label class="font-label-md text-label-md text-[#175CD3] font-semibold flex items-center justify-between">
+<span>Active / Focus State</span>
+<span class="text-caption font-caption text-[#175CD3]">2px Ring</span>
+</label>
+<div class="relative">
+<input class="w-full h-11 px-3.5 rounded-[10px] bg-white border-2 border-[#175CD3] text-[#1F2937] font-body-md text-body-md ring-4 ring-[#E7F2FF] outline-none" type="text" value="Hostel fee payment dates 2026"/>
+<span class="material-symbols-outlined absolute right-3 top-3 text-[#175CD3]" data-icon="edit" style="font-size: 20px;">edit</span>
+</div>
+<p class="font-caption text-caption text-[#175CD3]">Focused state with distinct contrast ring.</p>
+</div>
+<!-- Error State Input -->
+<div class="space-y-1.5">
+<label class="font-label-md text-label-md text-[#B42318] font-semibold flex items-center justify-between">
+<span>Error Validation State</span>
+<span class="text-caption font-caption text-[#B42318]">Invalid</span>
+</label>
+<div class="relative">
+<input class="w-full h-11 px-3.5 rounded-[10px] bg-red-50/40 border-2 border-[#B42318] text-[#1F2937] font-body-md text-body-md ring-2 ring-red-100 outline-none" type="text" value="Fee?"/>
+<span class="material-symbols-outlined absolute right-3 top-3 text-[#B42318]" data-icon="error" style="font-size: 20px;">error</span>
+</div>
+<p class="font-caption text-caption text-[#B42318] font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined" data-icon="info" style="font-size: 14px;">info</span>
+                Question requires at least 5 characters
+              </p>
+</div>
+</div>
+<!-- Select Field: Language Selector -->
+<div class="pt-2 max-w-md">
+<label class="font-label-md text-label-md text-on-surface font-semibold block mb-1.5">
+              Multilingual Selector Pill (Campus Localized)
+            </label>
+<div class="relative">
+<select class="w-full h-11 pl-10 pr-8 rounded-[10px] bg-white border border-[#DCE3ED] text-[#1F2937] font-title-md text-title-md appearance-none focus:border-[#175CD3] focus:ring-2 focus:ring-[#175CD3]/20 outline-none cursor-pointer">
+<option>English / हिंदी (Hindi) / বাংলা (Bengali)</option>
+<option>हिंदी (Hindi) / English</option>
+<option>தமிழ் (Tamil) / English</option>
+<option>తెలుగు (Telugu) / English</option>
+</select>
+<span class="material-symbols-outlined absolute left-3 top-3 text-[#175CD3]" data-icon="language" style="font-size: 20px;">language</span>
+<span class="material-symbols-outlined absolute right-3 top-3 text-[#667085] pointer-events-none" data-icon="arrow_drop_down" style="font-size: 20px;">arrow_drop_down</span>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 5: Conversational UI Components & Source Citation -->
+<section class="bg-surface-container-lowest border border-surface-variant rounded-xl p-6 md:p-8 shadow-level-1" id="conversational">
+<div class="mb-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="forum">forum</span>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface">Conversational UI &amp; Verified Citations</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+            Production-grade conversational anatomy featuring right-aligned student queries, left-aligned official agent responses, and linked academic citations.
+          </p>
+</div>
+<!-- Chat Stream Mock Canvas -->
+<div class="p-4 md:p-6 rounded-xl bg-[#F7F9FC] border border-[#DCE3ED] space-y-5">
+<!-- Multilingual Suggestion Chips -->
+<div>
+<div class="text-caption font-caption text-secondary font-semibold uppercase mb-2">Multilingual Suggestion Chips</div>
+<div class="flex flex-wrap gap-2 overflow-x-auto pb-1">
+<button class="px-3 py-1.5 rounded-[8px] bg-[#E7F2FF] text-[#175CD3] text-label-md font-label-md font-medium border border-transparent hover:bg-[#175CD3] hover:text-white transition-colors duration-150 flex items-center gap-1.5 shrink-0">
+<span class="material-symbols-outlined" data-icon="payments" style="font-size: 16px;">payments</span>
+                Fee deadlines
+              </button>
+<button class="px-3 py-1.5 rounded-[8px] bg-[#E7F2FF] text-[#175CD3] text-label-md font-label-md font-medium border border-transparent hover:bg-[#175CD3] hover:text-white transition-colors duration-150 flex items-center gap-1.5 shrink-0">
+<span class="material-symbols-outlined" data-icon="apartment" style="font-size: 16px;">apartment</span>
+                Hostel allotment
+              </button>
+<button class="px-3 py-1.5 rounded-[8px] bg-[#E7F2FF] text-[#175CD3] text-label-md font-label-md font-medium border border-transparent hover:bg-[#175CD3] hover:text-white transition-colors duration-150 flex items-center gap-1.5 shrink-0">
+<span class="material-symbols-outlined" data-icon="badge" style="font-size: 16px;">badge</span>
+                प्रवेश पत्र (Admit Card)
+              </button>
+<button class="px-3 py-1.5 rounded-[8px] bg-[#E7F2FF] text-[#175CD3] text-label-md font-label-md font-medium border border-transparent hover:bg-[#175CD3] hover:text-white transition-colors duration-150 flex items-center gap-1.5 shrink-0">
+<span class="material-symbols-outlined" data-icon="mark_email_read" style="font-size: 16px;">mark_email_read</span>
+                Transcript dispatch
+              </button>
+</div>
+</div>
+<!-- Student Question Bubble (Right-aligned, #14213D navy background, white text, timestamp) -->
+<div class="flex flex-col items-end">
+<div class="max-w-md bg-[#14213D] text-white p-4 rounded-[12px] rounded-br-[4px] shadow-sm">
+<p class="font-body-md text-body-md text-white">
+                When is the last date to pay the Spring Semester 2026 tuition fee without late fine?
+              </p>
+</div>
+<div class="flex items-center gap-2 mt-1.5 text-caption font-caption text-[#667085]">
+<span>10:42 AM</span>
+<span>•</span>
+<span>English / Student App</span>
+<span class="material-symbols-outlined text-[#175CD3]" data-icon="done_all" style="font-size: 14px;">done_all</span>
+</div>
+</div>
+<!-- SawaalNow Verified Answer Bubble (Left-aligned, white card with border #DCE3ED, #175CD3 icon avatar, clear answer) -->
+<div class="flex flex-col items-start max-w-xl">
+<div class="flex items-start gap-3 w-full">
+<!-- Bot Avatar -->
+<div class="w-8 h-8 rounded-full bg-[#175CD3] text-white flex items-center justify-center shrink-0 mt-1 shadow-sm">
+<span class="material-symbols-outlined" data-icon="verified_user" style="font-size: 18px;">verified_user</span>
+</div>
+<!-- Message Card -->
+<div class="flex-1 bg-white border border-[#DCE3ED] p-4 md:p-5 rounded-[12px] rounded-bl-[4px] shadow-level-1 space-y-3">
+<div class="flex items-center justify-between pb-2 border-b border-surface-variant">
+<span class="font-title-md text-title-md font-bold text-[#1F2937] flex items-center gap-1.5">
+                    SawaalNow Academic Assistant
+                  </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-[8px] bg-emerald-100 text-emerald-800 text-caption font-caption font-semibold">
+<span class="material-symbols-outlined" data-icon="check_circle" style="font-size: 14px;">check_circle</span>
+                    Dual Verified
+                  </span>
+</div>
+<p class="font-body-md text-body-md text-[#1F2937] leading-relaxed">
+                  The final deadline to deposit the Spring Semester 2026 tuition fees without incurring a late fee is <strong>Friday, January 16, 2026 at 5:00 PM IST</strong>. 
+                </p>
+<p class="font-body-md text-body-md text-[#1F2937] leading-relaxed">
+                  Submissions after January 16 will attract a statutory surcharge of ₹500 per week up to January 30, 2026, post which registration will be placed on administrative hold.
+                </p>
+<!-- Official Source Citation Component (Clickable pill badge with external link) -->
+<div class="pt-2">
+<div class="text-caption font-caption text-[#667085] font-semibold mb-1.5">OFFICIAL SOURCE CITATION:</div>
+<a class="inline-flex items-center gap-2 px-3 py-2 rounded-[8px] bg-[#F7F9FC] border border-[#DCE3ED] hover:bg-[#E7F2FF] hover:border-[#175CD3] text-[#175CD3] transition-colors group" href="#citation">
+<span class="material-symbols-outlined text-[#175CD3]" data-icon="menu_book" style="font-size: 18px;">menu_book</span>
+<span class="font-label-md text-label-md font-semibold text-[#1F2937] group-hover:text-[#175CD3]">
+                      Verified from: Academic Calendar 2025–26, Sec 3.1
+                    </span>
+<span class="material-symbols-outlined text-[#667085] group-hover:text-[#175CD3]" data-icon="open_in_new" style="font-size: 16px;">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Bot Metadata -->
+<div class="flex items-center gap-2 mt-1.5 ml-11 text-caption font-caption text-[#667085]">
+<span>10:42 AM</span>
+<span>•</span>
+<span>Confidence: 99.8%</span>
+<span>•</span>
+<span class="text-emerald-700 font-semibold">Dean Academic Portal Sync</span>
+</div>
+</div>
+<!-- Bottom Prompt Input Integration Preview -->
+<div class="pt-3 border-t border-[#DCE3ED]">
+<div class="relative flex items-center">
+<input class="w-full h-12 pl-4 pr-14 rounded-[10px] bg-white border border-[#DCE3ED] text-[#1F2937] placeholder-[#667085] font-body-md text-body-md focus:border-[#175CD3] focus:ring-2 focus:ring-[#175CD3]/20 outline-none" placeholder="Ask follow-up query in Hindi or English..." type="text"/>
+<button class="absolute right-1.5 w-9 h-9 rounded-[8px] bg-[#175CD3] text-white flex items-center justify-center hover:bg-[#144FB8] transition-colors shadow-sm">
+<span class="material-symbols-outlined" data-icon="send" style="font-size: 20px;">send</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 6: Trust & Verification States -->
+<section class="bg-surface-container-lowest border border-surface-variant rounded-xl p-6 md:p-8 shadow-level-1" id="trust">
+<div class="mb-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="verified">verified</span>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface">Trust, Verification &amp; Alert States</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+            Zero ambiguity alert banners with solid 4px accent borders for rapid cognitive comprehension during campus emergencies or disputes.
+          </p>
+</div>
+<div class="space-y-4">
+<!-- Verified Answer Alert (#15803D border & container) -->
+<div class="p-4 rounded-[12px] bg-emerald-50/70 border-l-4 border-[#15803D] border-t border-r border-b border-emerald-200 flex items-start gap-3">
+<span class="material-symbols-outlined text-[#15803D] shrink-0 mt-0.5" data-icon="check_circle">check_circle</span>
+<div class="flex-1">
+<p class="font-title-md text-title-md font-bold text-[#15803D]">
+                Verified Answer Alert
+              </p>
+<p class="font-body-md text-body-md text-emerald-950 mt-0.5">
+                Source verified by Dean of Academics portal. Synced directly with Ordinance 2026 §8.
+              </p>
+</div>
+<span class="text-caption font-caption px-2 py-0.5 rounded bg-emerald-200 text-emerald-900 font-bold shrink-0">Official</span>
+</div>
+<!-- Unverified / Escalation Alert (#B45309 border & container) -->
+<div class="p-4 rounded-[12px] bg-amber-50/70 border-l-4 border-[#B45309] border-t border-r border-b border-amber-200 flex items-start gap-3">
+<span class="material-symbols-outlined text-[#B45309] shrink-0 mt-0.5" data-icon="warning">warning</span>
+<div class="flex-1">
+<p class="font-title-md text-title-md font-bold text-[#B45309]">
+                Policy Pending Verification
+              </p>
+<p class="font-body-md text-body-md text-amber-950 mt-0.5">
+                This specific policy is not yet verified in the college handbook. Escalated to Registrar Desk (Ticket #SN-4091).
+              </p>
+</div>
+<span class="text-caption font-caption px-2 py-0.5 rounded bg-amber-200 text-amber-900 font-bold shrink-0">In Triage</span>
+</div>
+<!-- Error State (#B42318) -->
+<div class="p-4 rounded-[12px] bg-red-50/70 border-l-4 border-[#B42318] border-t border-r border-b border-red-200 flex items-start gap-3">
+<span class="material-symbols-outlined text-[#B42318] shrink-0 mt-0.5" data-icon="error">error</span>
+<div class="flex-1">
+<p class="font-title-md text-title-md font-bold text-[#B42318]">
+                Connection Interruption
+              </p>
+<p class="font-body-md text-body-md text-red-950 mt-0.5">
+                Unable to reach official campus directory. Please retry. If issue persists, check college intranet status.
+              </p>
+</div>
+<button class="px-2.5 py-1 rounded bg-[#B42318] text-white text-label-sm font-label-sm font-bold shrink-0 hover:bg-red-800 transition-colors">
+              Retry
+            </button>
+</div>
+<!-- Loading Indicator: Animated 3-dot pulse in academic blue for AI streaming response -->
+<div class="p-4 rounded-xl border border-surface-variant bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="font-title-md text-title-md font-bold text-on-surface">AI Synthesis &amp; Streaming Indicator</span>
+<span class="text-caption font-caption text-secondary">(Academic Blue #175CD3)</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white border border-[#DCE3ED] shadow-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-[#175CD3] dot-pulse-1"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#175CD3] dot-pulse-2"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#175CD3] dot-pulse-3"></span>
+<span class="text-caption font-caption text-[#175CD3] font-semibold ml-2">Consulting Gazette...</span>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 7: Dialog / Modal Spec -->
+<section class="bg-surface-container-lowest border border-surface-variant rounded-xl p-6 md:p-8 shadow-level-1" id="escalation">
+<div class="mb-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="quickreference">smart_outlet</span>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface">Confirmation Dialog Specification</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+            Max-width 540px, 12px rounded container, overlay elevation 2, crisp modal anatomy for irreversible actions.
+          </p>
+</div>
+<!-- Inline Dialog Modal Preview Container with authentic backdrop representation -->
+<div class="p-6 md:p-10 rounded-xl bg-slate-900/60 border border-surface-variant flex items-center justify-center">
+<!-- Dialog Card (Compact Confirmation Sheet) -->
+<div class="w-full max-w-[500px] bg-white rounded-[12px] p-6 shadow-level-2 border border-[#DCE3ED] space-y-4">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-full bg-amber-100 text-[#B45309] flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="support_agent" style="font-size: 20px;">support_agent</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-[#1F2937]">Confirm Escalation to Campus Admin</h3>
+<p class="font-caption text-caption text-[#667085]">Ticket Dispatch: Office of the Registrar</p>
+</div>
+</div>
+<button class="text-[#667085] hover:text-[#1F2937] p-1 rounded-md">
+<span class="material-symbols-outlined" data-icon="close" style="font-size: 20px;">close</span>
+</button>
+</div>
+<div class="p-3.5 rounded-lg bg-[#F7F9FC] border border-[#DCE3ED] space-y-2 text-body-md font-body-md text-[#1F2937]">
+<p>
+                Your query regarding <strong>“Waiver of Library Penalty Due to Hospitalization”</strong> is not auto-resolvable via public gazettes.
+              </p>
+<div class="text-caption font-caption text-[#667085] flex items-center gap-1.5 pt-1">
+<span class="material-symbols-outlined text-[#175CD3]" data-icon="info" style="font-size: 16px;">info</span>
+                Your student ID and attached medical certificates will be forwarded securely.
+              </div>
+</div>
+<div class="flex items-center justify-end gap-3 pt-2">
+<button class="h-10 px-4 rounded-[10px] bg-white border border-[#DCE3ED] text-[#1F2937] font-title-md text-title-md hover:bg-slate-50 transition-colors">
+                Cancel
+              </button>
+<button class="h-10 px-5 rounded-[10px] bg-[#175CD3] text-white font-title-md text-title-md hover:bg-[#144FB8] transition-colors flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined" data-icon="forward_to_inbox" style="font-size: 18px;">forward_to_inbox</span>
+                Dispatch Ticket
+              </button>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 8: Responsive Layout Breakpoints & Accessibility -->
+<section class="bg-surface-container-lowest border border-surface-variant rounded-xl p-6 md:p-8 shadow-level-1" id="responsive">
+<div class="mb-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="devices">devices</span>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface">Responsive Breakpoints &amp; Accessibility Standards</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+            Detailed layout distribution across diverse student devices in rural &amp; urban higher ed deployments.
+          </p>
+</div>
+<!-- Breakpoint Architecture Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+<!-- Mobile -->
+<div class="p-4 rounded-xl border border-surface-variant bg-surface-container-low space-y-2">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md font-bold text-on-surface">Mobile (&lt;640px)</span>
+<span class="material-symbols-outlined text-primary" data-icon="smartphone">smartphone</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">Single-column layout with fixed bottom navigation dock and auto-scrolling query field.</p>
+<ul class="text-caption font-caption text-on-surface space-y-1 list-disc list-inside">
+<li>16px margin &amp; inner gutters</li>
+<li>Compressed headline-xl-mobile (26px)</li>
+<li>Bottom-docked BottomNavBar shell</li>
+</ul>
+</div>
+<!-- Tablet -->
+<div class="p-4 rounded-xl border border-surface-variant bg-surface-container-low space-y-2">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md font-bold text-on-surface">Tablet (768px – 1024px)</span>
+<span class="material-symbols-outlined text-primary" data-icon="tablet">tablet</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">8-column layout. Split-view capable with optional collapsible context drawer.</p>
+<ul class="text-caption font-caption text-on-surface space-y-1 list-disc list-inside">
+<li>24px margin &amp; 16px gutter</li>
+<li>Expandable side citation sheet</li>
+<li>Dual language script side-by-side</li>
+</ul>
+</div>
+<!-- Desktop -->
+<div class="p-4 rounded-xl border border-surface-variant bg-surface-container-low space-y-2">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md font-bold text-on-surface">Desktop (1024px+)</span>
+<span class="material-symbols-outlined text-primary" data-icon="desktop_windows">desktop_windows</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">12-column max 1280px container with persistent NavigationDrawer rail.</p>
+<ul class="text-caption font-caption text-on-surface space-y-1 list-disc list-inside">
+<li>32px outer margin &amp; 24px gutter</li>
+<li>Persistent 72-unit left navigation rail</li>
+<li>Persistent source verification audit panel</li>
+</ul>
+</div>
+</div>
+<!-- Strict Accessibility Commitments -->
+<div class="p-4 rounded-xl bg-surface-container border border-surface-variant space-y-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-700" data-icon="accessibility_new">accessibility_new</span>
+<span class="font-title-md text-title-md font-bold text-on-surface">A11y &amp; Cognitive Equity Commitments</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-caption font-caption text-on-surface-variant">
+<div class="p-3 bg-white rounded-lg border border-surface-variant">
+<strong class="text-on-surface block mb-1">Color Contrast Ratio</strong>
+              Target minimum 4.5:1 for body and 7.0:1 for high priority citations across all Indic typography renderers.
+            </div>
+<div class="p-3 bg-white rounded-lg border border-surface-variant">
+<strong class="text-on-surface block mb-1">Keyboard Traversal</strong>
+              All interactive chips and prompt actions support clear 3px outer ring visual offsets for tab navigation.
+            </div>
+<div class="p-3 bg-white rounded-lg border border-surface-variant">
+<strong class="text-on-surface block mb-1">Zero AI Hallucination</strong>
+              Refuses open-domain generative conjecture; queries strictly fallback to registrar ticket dispatch.
+            </div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- BottomNavBar Component (Mobile Only as specified in Shared JSON) -->
+<!-- Active state autonomously set to "Advisor" matching the core assistant specification -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-16 px-4 md:hidden bg-surface-container-lowest dark:bg-inverse-surface border-t border-surface-variant dark:border-outline shadow-level-2">
+<!-- Tab 1: Advisor (ACTIVE) -->
+<a class="flex flex-col items-center justify-center text-primary dark:text-inverse-primary font-semibold active:scale-95 transition-transform duration-100" href="#conversational">
+<span class="material-symbols-outlined" data-icon="chat_bubble" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+<span class="font-label-sm text-label-sm mt-0.5">Advisor</span>
+</a>
+<!-- Tab 2: Directory (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary dark:hover:text-primary-fixed transition-colors active:scale-95 duration-100" href="#responsive">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="font-label-sm text-label-sm mt-0.5">Directory</span>
+</a>
+<!-- Tab 3: Handbook (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary dark:hover:text-primary-fixed transition-colors active:scale-95 duration-100" href="#tokens">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-sm text-label-sm mt-0.5">Handbook</span>
+</a>
+<!-- Tab 4: History (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary dark:hover:text-primary-fixed transition-colors active:scale-95 duration-100" href="#escalation">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-label-sm text-label-sm mt-0.5">History</span>
+</a>
+</nav>
+</body></html>

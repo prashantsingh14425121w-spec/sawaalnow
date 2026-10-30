@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SawaalNow - Multilingual AI College Helpdesk Agent</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined (Literal Requirement) -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Design System Tailwind Theme Configuration Verbatim -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-container": "#175cd3",
+            "tertiary-container": "#5a6570",
+            "surface-bright": "#f7f9fc",
+            "error": "#ba1a1a",
+            "surface-tint": "#0957ce",
+            "surface-container": "#eceef1",
+            "inverse-primary": "#b1c5ff",
+            "error-container": "#ffdad6",
+            "secondary-fixed-dim": "#b9c6ea",
+            "on-primary-fixed": "#001847",
+            "secondary-container": "#cdd9fe",
+            "tertiary": "#424d57",
+            "on-secondary-fixed": "#0d1b36",
+            "on-tertiary-fixed": "#121d26",
+            "surface-container-low": "#f2f4f7",
+            "on-secondary-fixed-variant": "#3a4664",
+            "on-primary": "#ffffff",
+            "surface-container-lowest": "#ffffff",
+            "on-primary-container": "#d7e0ff",
+            "on-background": "#191c1e",
+            "primary-fixed-dim": "#b1c5ff",
+            "secondary-fixed": "#d9e2ff",
+            "tertiary-fixed-dim": "#bdc8d4",
+            "surface": "#f7f9fc",
+            "surface-dim": "#d8dadd",
+            "on-secondary": "#ffffff",
+            "primary": "#0045a9",
+            "surface-variant": "#e0e3e6",
+            "inverse-on-surface": "#eff1f4",
+            "inverse-surface": "#2d3133",
+            "on-error-container": "#93000a",
+            "outline-variant": "#c3c6d6",
+            "on-secondary-container": "#525f7e",
+            "on-tertiary": "#ffffff",
+            "tertiary-fixed": "#d9e4f0",
+            "surface-container-high": "#e6e8eb",
+            "primary-fixed": "#dae2ff",
+            "on-tertiary-fixed-variant": "#3d4852",
+            "on-primary-fixed-variant": "#0040a0",
+            "secondary": "#525e7d",
+            "background": "#f7f9fc",
+            "on-error": "#ffffff",
+            "on-surface-variant": "#424654",
+            "on-surface": "#191c1e",
+            "outline": "#737785",
+            "on-tertiary-container": "#d7e2ef",
+            "surface-container-highest": "#e0e3e6"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter-desktop": "1.5rem",
+            "space-md": "0.75rem",
+            "space-sm": "0.5rem",
+            "margin-tablet": "1.5rem",
+            "margin-desktop": "2rem",
+            "margin": "1rem",
+            "space-xl": "2rem",
+            "space-xs": "0.25rem",
+            "space-2xl": "3rem",
+            "space-lg": "1.5rem",
+            "gutter": "1rem",
+            "space-base": "1rem"
+          },
+          "fontFamily": {
+            "label-md": ["Inter"],
+            "headline-xl-mobile": ["Inter"],
+            "caption": ["Inter"],
+            "body-md": ["Inter"],
+            "headline-xl": ["Inter"],
+            "headline-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "headline-lg": ["Inter"],
+            "body-md-medium": ["Inter"],
+            "title-md": ["Inter"],
+            "label-sm": ["Inter"]
+          },
+          "fontSize": {
+            "label-md": ["13px", { "lineHeight": "18px", "fontWeight": "500" }],
+            "headline-xl-mobile": ["26px", { "lineHeight": "34px", "fontWeight": "700" }],
+            "caption": ["11px", { "lineHeight": "14px", "fontWeight": "500" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-xl": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "body-md-medium": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    /* Ambient subtle elevation */
+    .elevation-1 {
+      box-shadow: 0 1px 3px rgba(16, 24, 40, 0.06), 0 1px 2px rgba(16, 24, 40, 0.04);
+    }
+    .elevation-2 {
+      box-shadow: 0 4px 12px rgba(16, 24, 40, 0.08), 0 2px 4px rgba(16, 24, 40, 0.04);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased min-h-screen flex flex-col selection:bg-secondary-container selection:text-primary">
+<!-- TOP APP BAR (Shared Component JSON Source of Truth) -->
+<header class="bg-surface-container-lowest border-b border-surface-variant sticky top-0 z-40">
+<div class="flex justify-between items-center w-full px-4 md:px-8 max-w-7xl mx-auto h-16">
+<!-- Brand & Demo Markers -->
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2">
+<!-- Required Logo Image -->
+<img alt="SawaalNow College Helpdesk Logo" class="h-8 md:h-9 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1VzZIIeTsbrH-XEQwJfFAz5AQ0EA7rNyp453jmN_5mQmGqQ2wFRgUDG-HkTB59WVmg5EdM44RuMT5f83_WL14yERQvr0g6OykOr0wW5rsHLiMeRupOhJTpBCdt5iPKSk4oamgLKddNJwMTS3LQUEDhcekhZ_CUKwOhSj2vjTiZQozpEGIshUOb3xFjxC1V2zfwU6hj2MQ3p34Op10-SXS3p_dW_nLCanAJ_-U5VTlw"/>
+<span class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight hidden sm:inline-block">SawaalNow</span>
+</div>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-caption font-caption bg-secondary-fixed text-on-secondary-fixed border border-secondary-fixed-dim font-medium">
+          College Helpdesk Demo
+        </span>
+<span class="hidden lg:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-caption font-caption bg-surface-container-low text-tertiary border border-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+          Demo Knowledge Base: Spring 2026 Regulations
+        </span>
+</div>
+<!-- Actions & Global Nav Cluster -->
+<div class="flex items-center gap-2 sm:gap-4">
+<!-- Interactive Knowledge Base Trigger -->
+<button class="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-label-md font-label-md text-on-surface-variant hover:bg-surface-container-low hover:text-primary transition-colors duration-150" onclick="toggleKBModal()">
+<span class="material-symbols-outlined text-[18px]">menu_book</span>
+<span>Knowledge Base</span>
+</button>
+<!-- Help Link -->
+<a class="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-label-md font-label-md text-on-surface-variant hover:bg-surface-container-low hover:text-primary transition-colors duration-150" href="#help-section">
+<span class="material-symbols-outlined text-[18px]">help_outline</span>
+<span>Help</span>
+</a>
+<!-- Multilingual Switcher (Literal from JSON trailing_action_text) -->
+<div class="relative">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-surface-variant bg-surface-container-lowest hover:bg-surface-container-low text-primary font-label-md text-label-md elevation-1 transition-colors duration-150" id="lang-btn" onclick="toggleLangMenu()">
+<span class="material-symbols-outlined text-[18px]">g_translate</span>
+<span class="font-medium">English / हिन्दी</span>
+<span class="material-symbols-outlined text-[16px] text-outline">expand_more</span>
+</button>
+<!-- Dropdown Language Panel -->
+<div class="hidden absolute right-0 mt-1 w-44 rounded-xl bg-surface-container-lowest border border-surface-variant elevation-2 py-1.5 z-50 text-left" id="lang-menu">
+<div class="px-3 py-1 text-caption font-caption text-outline uppercase tracking-wider">Interface Language</div>
+<button class="w-full text-left px-3 py-1.5 font-label-md text-label-md flex items-center justify-between hover:bg-surface-container-low text-primary font-semibold" onclick="setLang('English')">
+<span>English</span>
+<span class="material-symbols-outlined text-[18px]">check</span>
+</button>
+<button class="w-full text-left px-3 py-1.5 font-label-md text-label-md flex items-center justify-between hover:bg-surface-container-low text-on-surface" onclick="setLang('हिन्दी')">
+<span>हिन्दी (Hindi)</span>
+</button>
+<button class="w-full text-left px-3 py-1.5 font-label-md text-label-md flex items-center justify-between hover:bg-surface-container-low text-on-surface" onclick="setLang('Hinglish')">
+<span>Hinglish Mixed</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- MAIN APP CONTAINER (Desktop Dual-Pane & Responsive Split) -->
+<div class="flex-1 flex max-w-7xl w-full mx-auto pb-20 md:pb-6">
+<!-- LEFT PERSISTENT DRAWER: Academic Context / NavigationDrawer (Shared Component JSON) -->
+<aside class="hidden md:flex flex-col h-full w-72 p-4 shrink-0 border-r border-surface-variant">
+<!-- Drawer Header / Student Context Card -->
+<div class="p-3 mb-3 bg-surface-container-low rounded-xl border border-surface-variant">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-title-md shrink-0">
+            SN
+          </div>
+<div class="min-w-0">
+<h2 class="font-title-md text-title-md text-on-surface truncate">SawaalNow Academic Portal</h2>
+<p class="font-caption text-caption text-tertiary truncate">Multilingual Support Assistant</p>
+<span class="inline-block mt-0.5 font-caption text-[10px] text-primary font-medium bg-secondary-container px-1.5 py-0.2 rounded">Verified Student v2.4</span>
+</div>
+</div>
+</div>
+<div class="px-2 py-1 text-caption font-caption text-outline font-semibold tracking-wider uppercase mb-1">
+        Authoritative Portals
+      </div>
+<!-- Drawer Nav Items (Active matches "Advisor" intent / Academic Calendar) -->
+<nav aria-label="Campus Sections" class="space-y-1">
+<a class="flex items-center gap-3 bg-secondary-container text-primary font-semibold rounded-lg px-3 py-2 transition-all duration-150 ease-in-out" href="#admissions">
+<span class="material-symbols-outlined text-[20px]">account_balance</span>
+<span class="font-label-md text-label-md">Admissions &amp; Fees</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant rounded-lg px-3 py-2 font-medium hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#calendar">
+<span class="material-symbols-outlined text-[20px]">calendar_month</span>
+<span class="font-label-md text-label-md">Academic Calendar</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant rounded-lg px-3 py-2 font-medium hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#hostel">
+<span class="material-symbols-outlined text-[20px]">apartment</span>
+<span class="font-label-md text-label-md">Hostel &amp; Housing</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant rounded-lg px-3 py-2 font-medium hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#exams">
+<span class="material-symbols-outlined text-[20px]">assignment</span>
+<span class="font-label-md text-label-md">Examinations</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant rounded-lg px-3 py-2 font-medium hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#escalation">
+<span class="material-symbols-outlined text-[20px]">support_agent</span>
+<span class="font-label-md text-label-md">Registrar Escalation</span>
+</a>
+</nav>
+<!-- Repository Status Widget in Drawer Foot -->
+<div class="mt-auto pt-4 border-t border-surface-variant text-caption font-caption text-outline space-y-2">
+<div class="p-3 bg-surface-container-lowest rounded-lg border border-surface-variant elevation-1">
+<div class="flex items-center justify-between text-on-surface font-medium mb-1">
+<span>Verified Sources</span>
+<span class="text-primary font-semibold">9 Synced</span>
+</div>
+<p class="text-caption leading-relaxed text-on-surface-variant">College Ordinance v2025.2, Examination By-laws §12, Hostel Rulebook 2026.</p>
+</div>
+<div class="flex items-center justify-between px-1">
+<span>Buildathon 2026 Core</span>
+<span class="text-emerald-700 font-medium">Synced OK</span>
+</div>
+</div>
+</aside>
+<!-- RIGHT WORKING CANVAS: Chat Stream, Hero, & Message Composer -->
+<main class="flex-1 flex flex-col min-w-0 px-3 sm:px-6 md:px-8 pt-4">
+<!-- SYSTEM DISMISSABLE NOTICE / RETRY SIMULATION BANNER -->
+<div class="mb-4 flex items-center justify-between bg-surface-container-low border-l-4 border-primary px-4 py-2.5 rounded-lg border border-surface-variant elevation-1" id="status-banner">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-[20px]">sync</span>
+<p class="font-body-md text-body-md text-on-surface">
+<strong class="font-medium text-on-surface">Repository Active:</strong> Fall 2025 &amp; Spring 2026 circulars indexed. Offline caching enabled for Hindi &amp; English queries.
+          </p>
+</div>
+<button aria-label="Dismiss banner" class="text-outline hover:text-on-surface" onclick="document.getElementById('status-banner').remove()">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- HERO / ORIENTATION BLOCK -->
+<section class="bg-surface-container-lowest border border-surface-variant rounded-xl p-4 sm:p-6 mb-6 elevation-1">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-surface-variant">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Ask anything about your college</h1>
+</div>
+<p class="font-body-md text-body-md text-tertiary max-w-3xl leading-relaxed">
+              Answers are synthesized strictly from approved college ordinances, circulars, and handbooks. If information cannot be verified, human escalation is provided.
+            </p>
+</div>
+<div class="shrink-0 self-start md:self-auto">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-caption font-caption bg-amber-50 text-amber-800 border border-amber-200">
+<span class="material-symbols-outlined text-[16px] text-amber-700">science</span>
+<span>Demo Environment: Sample College Data for Evaluation Only</span>
+</span>
+</div>
+</div>
+<!-- Suggestion Chips Row -->
+<div class="pt-4">
+<p class="font-caption text-caption text-outline uppercase tracking-wider mb-2 font-semibold">Suggested Questions to Evaluate:</p>
+<div class="flex flex-wrap gap-2">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-primary hover:text-on-primary text-primary border border-surface-variant font-label-md text-label-md transition-colors duration-150" onclick="insertPrompt('What documents are required for admission?')">
+<span class="material-symbols-outlined text-[16px]">help_center</span>
+<span>What documents are required for admission?</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-primary hover:text-on-primary text-primary border border-surface-variant font-label-md text-label-md transition-colors duration-150" onclick="insertPrompt('कॉलेज के कार्यालय का समय क्या है?')">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span>कॉलेज के कार्यालय का समय क्या है?</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-primary hover:text-on-primary text-primary border border-surface-variant font-label-md text-label-md transition-colors duration-150" onclick="insertPrompt('How can I contact the helpdesk?')">
+<span class="material-symbols-outlined text-[16px]">contact_support</span>
+<span>How can I contact the helpdesk?</span>
+</button>
+</div>
+</div>
+</section>
+<!-- LIVE CONVERSATIONAL STREAM (Screen Reader Live Region) -->
+<section aria-live="polite" class="flex-1 space-y-6 pb-6" id="chat-stream">
+<div class="flex flex-col items-start hidden" id="loading-state">
+<div class="bg-surface-container-lowest border border-surface-variant rounded-xl rounded-bl-[4px] p-3.5 elevation-1 flex items-center gap-3">
+<!-- Pulsing Dots -->
+<div class="flex space-x-1.5 items-center">
+<div class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></div>
+<div class="w-2 h-2 rounded-full bg-primary-container animate-pulse [animation-delay:200ms]"></div>
+<div class="w-2 h-2 rounded-full bg-primary-container animate-pulse [animation-delay:400ms]"></div>
+</div>
+<span class="font-body-md text-body-md text-tertiary flex items-center gap-1.5">
+<span>Searching verified circulars...</span>
+</span>
+</div>
+<span class="text-caption font-caption text-outline mt-1 ml-1">Live grounding in progress</span>
+</div>
+</section>
+<!-- ==============================================
+           MESSAGE COMPOSER (Bottom Docked / Accessible)
+           ============================================== -->
+<section class="sticky bottom-0 z-30 pt-2 pb-3 bg-surface">
+<!-- Multilingual Suggestion Strip (Horizontal Scroller) -->
+<div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none text-caption font-caption">
+<span class="text-outline shrink-0 font-medium">Quick Topics:</span>
+<button class="shrink-0 px-2.5 py-1 rounded bg-[#E7F2FF] hover:bg-primary hover:text-white text-primary font-medium transition-colors" onclick="insertPrompt('Hostel list kab aayegi?')">Hostel mess rebate</button>
+<button class="shrink-0 px-2.5 py-1 rounded bg-[#E7F2FF] hover:bg-primary hover:text-white text-primary font-medium transition-colors" onclick="insertPrompt('पुस्तकालय कार्ड कैसे बनवाएं?')">लाइब्रेरी कार्ड (Library Card)</button>
+<button class="shrink-0 px-2.5 py-1 rounded bg-[#E7F2FF] hover:bg-primary hover:text-white text-primary font-medium transition-colors" onclick="insertPrompt('Supplementary examination schedule')">Supplementary Exam 2026</button>
+<button class="shrink-0 px-2.5 py-1 rounded bg-[#E7F2FF] hover:bg-primary hover:text-white text-primary font-medium transition-colors" onclick="insertPrompt('Sports quota eligibility criteria')">Sports Quota</button>
+</div>
+<!-- Composer Box -->
+<div class="bg-surface-container-lowest border border-surface-variant focus-within:border-primary-container focus-within:ring-2 focus-within:ring-[#E7F2FF] rounded-xl p-2.5 sm:p-3 elevation-1 transition-all">
+<label class="sr-only" for="chat-input">Student message composer</label>
+<textarea class="w-full bg-transparent border-0 focus:ring-0 resize-none font-body-md text-body-md text-on-surface placeholder:text-outline p-1 focus:outline-none" id="chat-input" oninput="handleInput(this)" onkeydown="handleKeyDown(event)" placeholder="Ask your question in English, Hindi, or Hinglish..." rows="2"></textarea>
+<!-- Composer Toolbar & Controls -->
+<div class="flex items-center justify-between pt-2 border-t border-surface-variant text-caption font-caption">
+<!-- Quick Input Tools -->
+<div class="flex items-center gap-1.5 sm:gap-3 text-tertiary">
+<!-- Language quick switch -->
+<button class="inline-flex items-center gap-1 px-2 py-1 rounded hover:bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm" onclick="toggleLangQuick()" title="Switch keyboard script">
+<span class="material-symbols-outlined text-[16px] text-primary">translate</span>
+<span class="hidden sm:inline" id="quick-lang-label">EN / HI</span>
+</button>
+<!-- Clear input -->
+<button class="inline-flex items-center gap-1 px-2 py-1 rounded hover:bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm" onclick="clearInput()" title="Clear typed query">
+<span class="material-symbols-outlined text-[16px]">clear_all</span>
+<span class="hidden sm:inline">Clear</span>
+</button>
+<button class="inline-flex items-center gap-1 px-2 py-1 rounded hover:bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm" onclick="toggleMic()" id="mic-btn" title="Clear typed query">
+<span class="material-symbols-outlined text-[16px]">mic</span>
+<span class="hidden sm:inline">Voice</span>
+</button>
+<!-- Keyboard shortcut hint -->
+<span class="hidden md:inline-flex items-center text-outline">
+                Press <kbd class="px-1 py-0.5 mx-1 rounded bg-surface-container border border-surface-variant text-[10px]">Enter</kbd> to send, <kbd class="px-1 py-0.5 mx-1 rounded bg-surface-container border border-surface-variant text-[10px]">Shift+Enter</kbd> for line
+              </span>
+</div>
+<!-- Counter & Primary Send Action -->
+<div class="flex items-center gap-3">
+<span class="text-outline text-caption" id="char-counter">0 / 1,000 characters</span>
+<button aria-label="Send query" class="inline-flex items-center justify-center gap-1.5 w-10 h-10 sm:w-auto sm:px-4 sm:py-2 rounded-[10px] bg-primary-container hover:bg-[#144FB8] text-white font-label-md text-label-md font-semibold elevation-1 active:scale-95 transition-all" id="send-btn" onclick="sendMessage()">
+<span class="material-symbols-outlined text-[18px]">send</span>
+<span class="hidden sm:inline">Send Question</span>
+</button>
+</div>
+</div>
+</div>
+<div class="mt-1 flex items-center justify-between px-1 text-caption font-caption text-outline">
+<span>AI answers grounded on official registrar circulars only.</span>
+<span class="text-primary font-medium">Buildathon Evaluation Mode</span>
+</div>
+</section>
+</main>
+</div>
+<!-- BOTTOM NAVBAR (Shared Component JSON - Visible on Mobile Only) -->
+<!-- Destination Mapping: Page is currently working chat advisor -> Active Tab is "Advisor" -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-16 px-4 md:hidden bg-surface-container-lowest border-t border-surface-variant elevation-2">
+<!-- Tab 1: Advisor (ACTIVE) -->
+<a class="flex flex-col items-center justify-center text-primary font-semibold active:scale-95 transition-transform duration-100" href="#advisor">
+<span class="material-symbols-outlined text-[22px]">chat_bubble</span>
+<span class="font-label-sm text-label-sm">Advisor</span>
+</a>
+<!-- Tab 2: Directory (INACTIVE) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant font-medium hover:text-primary transition-colors active:scale-95 duration-100" href="#directory">
+<span class="material-symbols-outlined text-[22px]">school</span>
+<span class="font-label-sm text-label-sm">Directory</span>
+</a>
+<!-- Tab 3: Handbook (INACTIVE) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant font-medium hover:text-primary transition-colors active:scale-95 duration-100" href="#handbook">
+<span class="material-symbols-outlined text-[22px]">menu_book</span>
+<span class="font-label-sm text-label-sm">Handbook</span>
+</a>
+<!-- Tab 4: History (INACTIVE) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant font-medium hover:text-primary transition-colors active:scale-95 duration-100" href="#history">
+<span class="material-symbols-outlined text-[22px]">history</span>
+<span class="font-label-sm text-label-sm">History</span>
+</a>
+</nav>
+<!-- ==============================================
+       MODALS & CONTEXT DRAWERS
+       ============================================== -->
+<!-- Knowledge Base Index Modal -->
+<div class="fixed inset-0 z-50 hidden bg-[#14213D]/40 backdrop-blur-xs flex items-center justify-center p-4" id="kb-modal">
+<div class="bg-surface-container-lowest w-full max-w-lg rounded-xl border border-surface-variant elevation-2 p-5">
+<div class="flex items-center justify-between pb-3 border-b border-surface-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">menu_book</span>
+<h3 class="font-title-md text-title-md text-on-surface">Approved Regulations Database</h3>
+</div>
+<button class="text-outline hover:text-on-surface" onclick="toggleKBModal()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="py-3 space-y-3 font-body-md text-body-md">
+<p class="text-caption text-tertiary">The following official publications are vectorized into the SawaalNow knowledge graph for Spring 2026:</p>
+<div class="space-y-2">
+<div class="p-2.5 rounded-lg border border-surface-variant bg-surface-container-low flex justify-between items-center">
+<div>
+<div class="font-label-md text-label-md font-semibold text-on-surface">Undergraduate Ordinances 2025–26</div>
+<div class="text-caption text-outline">Sections 1.0 – 14.8 • Updated Dec 2025</div>
+</div>
+<span class="text-caption font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Indexed</span>
+</div>
+<div class="p-2.5 rounded-lg border border-surface-variant bg-surface-container-low flex justify-between items-center">
+<div>
+<div class="font-label-md text-label-md font-semibold text-on-surface">Hostel By-laws &amp; Mess Regulations</div>
+<div class="text-caption text-outline">Chief Warden Gazette • Verified</div>
+</div>
+<span class="text-caption font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Indexed</span>
+</div>
+<div class="p-2.5 rounded-lg border border-surface-variant bg-surface-container-low flex justify-between items-center">
+<div>
+<div class="font-label-md text-label-md font-semibold text-on-surface">Examination Manual &amp; Grading Scale</div>
+<div class="text-caption text-outline">Controller of Examinations • CBCS Standard</div>
+</div>
+<span class="text-caption font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Indexed</span>
+</div>
+</div>
+</div>
+<div class="pt-3 border-t border-surface-variant flex justify-end">
+<button class="px-4 py-2 rounded-lg bg-surface-container-low border border-surface-variant font-label-md text-label-md text-on-surface hover:bg-surface-variant" onclick="toggleKBModal()">
+          Close Catalog
+        </button>
+</div>
+</div>
+</div>
+<!-- Escalation Ticket Modal -->
+<div class="fixed inset-0 z-50 hidden bg-[#14213D]/40 backdrop-blur-xs flex items-center justify-center p-4" id="escalate-modal">
+<div class="bg-surface-container-lowest w-full max-w-md rounded-xl border border-surface-variant elevation-2 p-5">
+<div class="flex items-center justify-between pb-3 border-b border-surface-variant">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined">support_agent</span>
+<h3 class="font-title-md text-title-md text-on-surface">Escalate to Registrar Desk</h3>
+</div>
+<button class="text-outline hover:text-on-surface" onclick="closeEscalationModal()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="py-3 space-y-3 font-body-md text-body-md text-on-surface">
+<p class="text-caption text-tertiary">An official ticket will be routed to the Academic Section with the query context below:</p>
+<div class="p-2.5 bg-surface-container-low border border-surface-variant rounded-lg font-caption text-on-surface">
+ <strong>Referenced Query:</strong> <span id="esc-q"></span>
+        </div>
+<div><label class="block font-label-md text-label-md font-medium text-on-surface mb-1">Your Name</label><input id="esc-name" class="w-full rounded-lg border border-surface-variant p-2 text-body-md bg-surface-container-lowest focus:border-primary-container focus:ring-0" type="text"/></div>
+<div><label class="block font-label-md text-label-md font-medium text-on-surface mb-1">Phone Number</label><input id="esc-phone" inputmode="tel" class="w-full rounded-lg border border-surface-variant p-2 text-body-md bg-surface-container-lowest focus:border-primary-container focus:ring-0" type="text"/></div>
+<div>
+<label class="block font-label-md text-label-md font-medium text-on-surface mb-1">Additional Note (Optional)</label>
+<textarea class="w-full rounded-lg border border-surface-variant p-2 text-body-md bg-surface-container-lowest focus:border-primary-container focus:ring-0" id="esc-note" placeholder="Provide additional details for the registrar..." rows="2"></textarea>
+</div>
+</div>
+<div class="pt-3 border-t border-surface-variant flex justify-end gap-2">
+<button class="px-3 py-1.5 rounded-lg border border-surface-variant text-body-md hover:bg-surface-container-low" onclick="closeEscalationModal()">Cancel</button>
+<button class="px-4 py-1.5 rounded-lg bg-primary-container text-white font-label-md text-label-md font-semibold hover:bg-[#144FB8]" onclick="submitEscalation()">Submit Ticket</button>
+</div>
+</div>
+</div>
+<!-- Accessible Micro-Interactions Script -->
+<script>
+(function () {
+  var LANG = '';
+  var LCODE = { 'हिन्दी': 'hi-IN', 'English': 'en-IN', 'தமிழ்': 'ta-IN', 'తెలుగు': 'te-IN', 'বাংলা': 'bn-IN', 'मराठी': 'mr-IN', 'ગુજરાતી': 'gu-IN', 'ಕನ್ನಡ': 'kn-IN', 'മലയാളം': 'ml-IN', 'ਪੰਜਾਬੀ': 'pa-IN' };
+  var busy = false, escQ = '', escBtn = null, cid = 0, rec = null;
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(t) { return String(t).replace(/[&<>"']/g, function (m) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m]; }); }
+  function now() { return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); }
+  function tl() { return LANG || navigator.language || 'en-IN'; }
+
+  window.handleInput = function (t) {
+    $('char-counter').innerText = t.value.length + ' / 1,000 characters';
+    t.style.height = 'auto'; t.style.height = Math.min(t.scrollHeight, 120) + 'px';
+  };
+  window.handleKeyDown = function (e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); window.sendMessage(); } };
+  window.insertPrompt = function (text) { var i = $('chat-input'); i.value = text; window.handleInput(i); i.focus(); };
+  window.clearInput = function () { var i = $('chat-input'); i.value = ''; window.handleInput(i); i.focus(); };
+  window.toggleLangMenu = function () { $('lang-menu').classList.toggle('hidden'); };
+  window.setLang = function (lang) {
+    $('lang-btn').querySelector('span:nth-child(2)').innerText = lang;
+    $('lang-menu').classList.add('hidden');
+    LANG = ''; Object.keys(LCODE).forEach(function (k) { if (!LANG && lang.indexOf(k) > -1) LANG = LCODE[k]; });
+  };
+  window.toggleLangQuick = function () { var l = $('quick-lang-label'); l.innerText = l.innerText === 'EN / HI' ? 'HI ONLY' : 'EN / HI'; LANG = l.innerText === 'HI ONLY' ? 'hi-IN' : ''; };
+  window.toggleCitation = function (id) {
+    var d = $(id), hid = d.classList.contains('hidden');
+    d.classList.toggle('hidden');
+    $(id + '-label').innerText = hid ? 'Hide excerpt from approved circular' : 'View excerpt from approved circular';
+  };
+  window.toggleKBModal = function () { $('kb-modal').classList.toggle('hidden'); };
+  window.closeEscalationModal = function () { $('escalate-modal').classList.add('hidden'); };
+  window.openEscalationModal = function (btn, q) { escBtn = btn; escQ = q; $('esc-q').textContent = '"' + q + '"'; $('escalate-modal').classList.remove('hidden'); };
+  window.speakText = function (text, lang) {
+    if (!window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(text); u.lang = lang || tl(); u.rate = 0.9; window.speechSynthesis.speak(u);
+  };
+  window.toggleMic = function () {
+    var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SR) { alert('Voice input is not supported in this browser. Try Chrome.'); return; }
+    if (rec) { rec.stop(); return; }
+    rec = new SR(); rec.lang = tl();
+    rec.onresult = function (e) { $('chat-input').value = e.results[0][0].transcript; window.handleInput($('chat-input')); window.sendMessage(); };
+    rec.onend = rec.onerror = function () { rec = null; $('mic-btn').style.opacity = ''; };
+    $('mic-btn').style.opacity = '.6'; rec.start();
+  };
+
+  window.submitEscalation = function () {
+    var name = $('esc-name').value.trim(), phone = $('esc-phone').value.trim();
+    if (!name || phone.replace(/\D/g, '').length < 10) { alert('Please enter your name and a 10-digit phone number.'); return; }
+    fetch('/api/handoff', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: name, phone: phone, question: escQ, dept: 'Registrar Desk', details: $('esc-note').value }) })
+      .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+      .then(function (o) {
+        alert('Ticket ' + o.ticket + ' created. A customer executive will call ' + phone + '.');
+        if (escBtn) { escBtn.disabled = true; escBtn.querySelector('span:nth-child(2)').innerText = 'Ticket ' + o.ticket + ' sent'; }
+        window.closeEscalationModal();
+      }).catch(function () { alert('Could not create the ticket. Please try again.'); });
+  };
+
+  function userBubble(val) {
+    var d = document.createElement('div'); d.className = 'flex flex-col items-end';
+    d.innerHTML = '<div class="max-w-[85%] sm:max-w-[70%] bg-[#14213D] text-white rounded-xl rounded-br-[4px] p-3.5 elevation-1"><p class="font-body-md text-body-md leading-relaxed">' + esc(val) + '</p></div><div class="flex items-center gap-2 mt-1 text-caption font-caption text-tertiary"><span>Student (You)</span><span>•</span><span>' + now() + '</span></div>';
+    return d;
+  }
+  function botCard(o, q) {
+    var ok = o.found && o.source, id = 'cite-' + (++cid);
+    var d = document.createElement('div'); d.className = 'flex flex-col items-start';
+    var border = ok ? 'border-surface-variant' : 'border-amber-300';
+    var av = ok ? 'bg-primary-container' : 'bg-amber-600';
+    var pill = ok
+      ? '<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-caption font-caption bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold"><span class="material-symbols-outlined text-[15px] text-emerald-700">verified</span><span>Verified Circular</span></span>'
+      : '<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-caption font-caption bg-amber-50 text-amber-800 border border-amber-300 font-semibold"><span class="material-symbols-outlined text-[15px] text-amber-700">warning</span><span>Information Not Verified in Official Records</span></span>';
+    var body = ok
+      ? '<div class="space-y-3 font-body-md text-body-md text-on-surface leading-relaxed"><p>' + esc(o.answer) + '</p></div>'
+      : '<div class="space-y-3 font-body-md text-body-md text-on-surface leading-relaxed"><p>' + esc(o.answer) + '</p><div class="p-3 bg-amber-50/70 border-l-4 border-amber-600 rounded-r-lg text-amber-900 font-body-md"><p class="font-medium">Strict Verification Policy:</p><p class="text-caption mt-0.5">SawaalNow only quotes verified rules. Because this could not be verified in the approved circulars, please submit an official escalation.</p></div></div>';
+    var cite = ok
+      ? '<div class="mt-4 pt-3 border-t border-surface-variant"><div class="flex flex-wrap items-center justify-between gap-2 bg-surface-container-low p-2.5 rounded-lg border border-surface-variant"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-[20px]">description</span><span class="font-label-md text-label-md text-on-surface font-medium">Source: ' + esc(o.source.title) + ' (' + esc(o.source.date) + ')</span></div><button class="inline-flex items-center gap-1 text-primary hover:underline font-label-sm text-label-sm font-semibold" onclick="toggleCitation(\'' + id + '\')"><span id="' + id + '-label">View excerpt from approved circular</span><span class="material-symbols-outlined text-[16px]">expand_more</span></button></div><div class="hidden mt-2 p-3 bg-[#E7F2FF] border border-[#BFDBFE] rounded-lg" id="' + id + '"><div class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-[20px] shrink-0">format_quote</span><div class="font-caption text-caption text-on-surface leading-relaxed"><p class="font-semibold text-primary mb-1">Verbatim Excerpt (' + esc(o.source.id) + '):</p><p class="italic text-tertiary">' + esc(o.source.text) + '</p></div></div></div></div>'
+      : '<div class="mt-4 pt-3 border-t border-surface-variant flex flex-wrap items-center gap-3"><button class="esc-btn inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary-container hover:bg-[#144FB8] text-white font-label-md text-label-md font-semibold elevation-1 transition-colors"><span class="material-symbols-outlined text-[18px]">support_agent</span><span>Escalate to Registrar Desk</span></button></div>';
+    var fb = ok
+      ? '<div class="mt-4 flex items-center justify-between pt-2 border-t border-surface-variant text-caption font-caption text-outline"><div class="flex items-center gap-2"><span>Was this verified response helpful?</span><button class="fb inline-flex items-center gap-1 px-2 py-1 rounded hover:bg-surface-container-low hover:text-on-surface border border-surface-variant"><span class="material-symbols-outlined text-[16px]">thumb_up</span><span>Yes</span></button><button class="fb inline-flex items-center gap-1 px-2 py-1 rounded hover:bg-surface-container-low hover:text-on-surface border border-surface-variant"><span class="material-symbols-outlined text-[16px]">thumb_down</span><span>No</span></button><button class="spk inline-flex items-center gap-1 px-2 py-1 rounded hover:bg-surface-container-low hover:text-on-surface border border-surface-variant"><span class="material-symbols-outlined text-[16px]">volume_up</span><span>Listen</span></button></div><span class="text-tertiary">Grounded in approved circulars</span></div>'
+      : '';
+    d.innerHTML = '<div class="max-w-[95%] sm:max-w-[85%] bg-surface-container-lowest border ' + border + ' rounded-xl rounded-bl-[4px] p-4 sm:p-5 elevation-1"><div class="flex items-center justify-between pb-3 mb-3 border-b border-surface-variant"><div class="flex items-center gap-2"><div class="w-6 h-6 rounded ' + av + ' text-white flex items-center justify-center font-bold text-caption">SN</div><span class="font-title-md text-title-md text-on-surface">SawaalNow Helpdesk Agent</span></div>' + pill + '</div>' + body + cite + fb + '</div><div class="flex items-center gap-2 mt-1 text-caption font-caption text-tertiary"><span>SawaalNow Agent</span><span>•</span><span>' + now() + '</span></div>';
+    var eb = d.querySelector('.esc-btn'); if (eb) eb.onclick = function () { window.openEscalationModal(eb, q); };
+    d.querySelectorAll('.fb').forEach(function (b) { b.onclick = function () { d.querySelectorAll('.fb').forEach(function (x) { x.disabled = true; }); b.classList.add('text-primary'); }; });
+    var sp = d.querySelector('.spk'); if (sp) sp.onclick = function () { window.speakText(o.answer, o.lang); };
+    return d;
+  }
+  function errCard(q) {
+    var d = document.createElement('div'); d.className = 'flex flex-col items-start';
+    d.innerHTML = '<div class="max-w-[95%] sm:max-w-[85%] bg-surface-container-lowest border border-red-300 rounded-xl rounded-bl-[4px] p-4 elevation-1"><p class="font-body-md text-body-md text-on-surface">Something went wrong reaching the AI. Your question is saved.</p><button class="mt-3 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary-container text-white font-label-md text-label-md font-semibold"><span class="material-symbols-outlined text-[18px]">refresh</span><span>Retry</span></button></div>';
+    d.querySelector('button').onclick = function () { d.remove(); window.sendMessage(q); };
+    return d;
+  }
+
+  window.sendMessage = function (again) {
+    var input = $('chat-input');
+    var val = (typeof again === 'string' ? again : input.value).trim();
+    if (!val || busy) return;
+    busy = true;
+    var stream = $('chat-stream'), loader = $('loading-state');
+    if (typeof again !== 'string') stream.insertBefore(userBubble(val), loader);
+    input.value = ''; window.handleInput(input);
+    loader.classList.remove('hidden');
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    fetch('/api/ask', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question: val }) })
+      .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+      .then(function (o) { stream.insertBefore(botCard(o, val), loader); if (o.found) window.speakText(o.answer, o.lang); })
+      .catch(function () { stream.insertBefore(errCard(val), loader); })
+      .then(function () { loader.classList.add('hidden'); busy = false; window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); });
+  };
+
+  window.addEventListener('click', function (e) {
+    var b = $('lang-btn'), m = $('lang-menu');
+    if (b && m && !b.contains(e.target) && !m.contains(e.target)) m.classList.add('hidden');
+  });
+})();
+</script>
+
+</body></html>

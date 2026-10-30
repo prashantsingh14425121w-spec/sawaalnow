@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SawaalNow - Verified Academic Support</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed": "#d9e4f0",
+            "on-background": "#191c1e",
+            "inverse-primary": "#b1c5ff",
+            "surface-tint": "#0957ce",
+            "on-error-container": "#93000a",
+            "on-surface": "#191c1e",
+            "error": "#ba1a1a",
+            "on-primary-fixed": "#001847",
+            "on-primary-container": "#d7e0ff",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-high": "#e6e8eb",
+            "primary-fixed": "#dae2ff",
+            "on-tertiary": "#ffffff",
+            "tertiary-container": "#5a6570",
+            "background": "#f7f9fc",
+            "on-secondary-fixed": "#0d1b36",
+            "secondary": "#525e7d",
+            "on-tertiary-container": "#d7e2ef",
+            "primary-fixed-dim": "#b1c5ff",
+            "secondary-container": "#cdd9fe",
+            "on-tertiary-fixed-variant": "#3d4852",
+            "on-primary": "#ffffff",
+            "surface-bright": "#f7f9fc",
+            "on-secondary-container": "#525f7e",
+            "outline-variant": "#c3c6d6",
+            "on-primary-fixed-variant": "#0040a0",
+            "on-surface-variant": "#424654",
+            "error-container": "#ffdad6",
+            "on-error": "#ffffff",
+            "on-secondary-fixed-variant": "#3a4664",
+            "inverse-surface": "#2d3133",
+            "primary": "#0045a9",
+            "secondary-fixed-dim": "#b9c6ea",
+            "surface": "#f7f9fc",
+            "surface-container-low": "#f2f4f7",
+            "on-tertiary-fixed": "#121d26",
+            "surface-variant": "#e0e3e6",
+            "surface-dim": "#d8dadd",
+            "surface-container": "#eceef1",
+            "on-secondary": "#ffffff",
+            "tertiary-fixed-dim": "#bdc8d4",
+            "inverse-on-surface": "#eff1f4",
+            "secondary-fixed": "#d9e2ff",
+            "primary-container": "#175cd3",
+            "surface-container-highest": "#e0e3e6",
+            "outline": "#737785",
+            "tertiary": "#424d57"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-sm": "0.5rem",
+            "margin-desktop": "2rem",
+            "gutter": "1rem",
+            "gutter-desktop": "1.5rem",
+            "space-xl": "2rem",
+            "space-base": "1rem",
+            "margin": "1rem",
+            "space-2xl": "3rem",
+            "space-lg": "1.5rem",
+            "space-md": "0.75rem",
+            "space-xs": "0.25rem",
+            "margin-tablet": "1.5rem"
+          },
+          "fontFamily": {
+            "body-lg": ["Inter"],
+            "body-md": ["Inter"],
+            "caption": ["Inter"],
+            "headline-xl": ["Inter"],
+            "headline-xl-mobile": ["Inter"],
+            "body-md-medium": ["Inter"],
+            "headline-md": ["Inter"],
+            "title-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "headline-lg": ["Inter"],
+            "label-md": ["Inter"]
+          },
+          "fontSize": {
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "caption": ["11px", { "lineHeight": "14px", "fontWeight": "500" }],
+            "headline-xl": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+            "headline-xl-mobile": ["26px", { "lineHeight": "34px", "fontWeight": "700" }],
+            "body-md-medium": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "label-md": ["13px", { "lineHeight": "18px", "fontWeight": "500" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md antialiased min-h-screen flex flex-col justify-between selection:bg-secondary-container">
+<!-- Top App Bar & Environment Banner (Shared Component Spec Adapted to Mobile Screen) -->
+<header class="sticky top-0 z-40 bg-surface-container-lowest shadow-sm">
+<!-- Main Top Nav -->
+<div class="flex justify-between items-center w-full px-4 h-16 max-w-md mx-auto">
+<div class="flex items-center gap-2.5">
+<img alt="SawaalNow Brand Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1VzZIIeTsbrH-XEQwJfFAz5AQ0EA7rNyp453jmN_5mQmGqQ2wFRgUDG-HkTB59WVmg5EdM44RuMT5f83_WL14yERQvr0g6OykOr0wW5rsHLiMeRupOhJTpBCdt5iPKSk4oamgLKddNJwMTS3LQUEDhcekhZ_CUKwOhSj2vjTiZQozpEGIshUOb3xFjxC1V2zfwU6hj2MQ3p34Op10-SXS3p_dW_nLCanAJ_-U5VTlw"/>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-primary-fixed text-primary tracking-wide uppercase">Demo</span>
+</div>
+<div class="flex items-center gap-2">
+<!-- Language Switcher Pill -->
+<button aria-label="Toggle language between English and Hindi" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-surface-container-low text-on-surface border border-outline-variant/40 hover:bg-surface-container transition-colors" type="button">
+<span class="font-label-sm text-label-sm font-semibold tracking-tight text-primary">EN / HI</span>
+<span class="material-symbols-outlined text-[16px] text-outline">expand_more</span>
+</button>
+<!-- Help / Support Icon -->
+<button aria-label="Portal instructions and emergency registrar escalations" class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">help</span>
+</button>
+</div>
+</div>
+<!-- Institutional Notice Bar -->
+<div class="bg-surface-container-low px-4 py-1.5 text-center flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>
+<p class="font-caption text-caption text-on-surface-variant font-medium">Demo environment • Grounded on approved college regulations.</p>
+</div>
+</header>
+<!-- Conversational Feed Canvas -->
+<main class="flex-1 w-full max-w-md mx-auto px-4 pt-4 pb-48 flex flex-col gap-5">
+<!-- Active Session Time Indicator -->
+<div class="flex justify-center items-center my-1">
+<span class="px-3 py-1 rounded-full bg-surface-container font-caption text-caption text-on-surface-variant">Today • Fall Admissions 2026</span>
+</div>
+<!-- Student Question 1 -->
+<div class="flex flex-col items-end gap-1 pl-8">
+<div class="bg-[#14213D] text-white px-4 py-3 rounded-2xl rounded-br-[4px] shadow-sm max-w-[90%]">
+<p class="font-body-md text-body-md font-medium text-white leading-relaxed">What documents do I need for UG admission?</p>
+</div>
+<div class="flex items-center gap-1.5 pr-1">
+<span class="font-caption text-caption text-on-surface-variant">Student • 10:14 AM</span>
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">done_all</span>
+</div>
+</div>
+<!-- Assistant Evidence-Backed Answer 1 -->
+<div class="flex flex-col gap-1 pr-4">
+<div class="flex items-center gap-2 mb-1">
+<div class="w-6 h-6 rounded-full bg-primary-container text-white flex items-center justify-center shadow-xs">
+<span class="material-symbols-outlined text-[14px]">school</span>
+</div>
+<span class="font-label-md text-label-md font-semibold text-on-surface">SawaalNow Academic Assistant</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-[#DCFCE7] text-[#15803D]">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+          Verified Ordinance
+        </span>
+</div>
+<div class="bg-surface-container-lowest border border-[#DCE3ED] rounded-2xl rounded-bl-[4px] p-4 shadow-sm flex flex-col gap-3">
+<p class="font-body-md text-body-md text-on-surface leading-normal">According to the university admission ordinance, all undergraduate applicants must bring the following 5 mandatory credentials during physical counseling:</p>
+<ul class="space-y-1.5 pl-1 font-body-md text-body-md text-on-surface">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary mt-0.5">check</span>
+<span>Class 10th Board Certificate &amp; Marksheet (DoB proof)</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary mt-0.5">check</span>
+<span>Class 12th Senior Secondary Qualifying Certificate</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary mt-0.5">check</span>
+<span>Valid State/Central Domicile Certificate (if quota applicable)</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary mt-0.5">check</span>
+<span>Transfer &amp; Character Certificate from last attended school</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary mt-0.5">check</span>
+<span>Four recent colored passport-size photographs</span>
+</li>
+</ul>
+<!-- Expandable Verified Citation Card -->
+<details class="group bg-[#F7F9FC] border border-[#E7F2FF] rounded-xl overflow-hidden text-on-surface transition-all">
+<summary class="flex items-center justify-between p-3 cursor-pointer select-none bg-surface-container-low/60 hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">description</span>
+<span class="font-label-md text-label-md font-semibold text-primary">UG Admission Regulations 2025–26, Sec 4.2</span>
+</div>
+<span class="material-symbols-outlined text-[18px] text-outline group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="p-3 pt-2 font-caption text-caption text-on-surface-variant border-t border-[#E7F2FF] bg-surface-container-lowest leading-relaxed">
+<p class="font-medium text-on-surface mb-1">Official Policy Snippet:</p>
+<blockquote class="italic border-l-2 border-primary pl-2.5 my-1 text-on-surface-variant">
+              “Candidates must present original copies alongside two sets of self-attested photocopies during document verification at the central administrative atrium. Incomplete applications will automatically forfeit counseling priority.”
+            </blockquote>
+<div class="mt-2 flex items-center justify-between pt-1">
+<span class="text-[10px] text-outline font-medium">Source Document ID: REG-ORD-2025-42B</span>
+<a class="inline-flex items-center gap-0.5 text-primary text-[11px] font-semibold hover:underline" href="#citation-source">
+                View ordinance PDF
+                <span class="material-symbols-outlined text-[12px]">open_in_new</span>
+</a>
+</div>
+</div>
+</details>
+<!-- Feedback micro-actions -->
+<div class="flex items-center justify-between pt-1 border-t border-surface-variant/70 text-on-surface-variant">
+<span class="font-caption text-caption text-outline">Was this verified answer helpful?</span>
+<div class="flex items-center gap-1">
+<button aria-label="Mark answer as helpful" class="p-1.5 rounded hover:bg-surface-container-low text-outline hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">thumb_up</span>
+</button>
+<button aria-label="Mark answer as unhelpful" class="p-1.5 rounded hover:bg-surface-container-low text-outline hover:text-error transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">thumb_down</span>
+</button>
+</div>
+</div>
+</div>
+<span class="font-caption text-caption text-on-surface-variant pl-1">SawaalNow • 10:15 AM</span>
+</div>
+<!-- Student Question 2 -->
+<div class="flex flex-col items-end gap-1 pl-8">
+<div class="bg-[#14213D] text-white px-4 py-3 rounded-2xl rounded-br-[4px] shadow-sm max-w-[90%]">
+<p class="font-body-md text-body-md font-medium text-white leading-relaxed">Can I get a fee waiver for hostel if my uncle lives 5km away?</p>
+</div>
+<div class="flex items-center gap-1.5 pr-1">
+<span class="font-caption text-caption text-on-surface-variant">Student • 10:20 AM</span>
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">done_all</span>
+</div>
+</div>
+<!-- Assistant Unknown-Answer State (Hallucination Guardrail Triggered) -->
+<div class="flex flex-col gap-1 pr-2">
+<div class="flex items-center gap-2 mb-1">
+<div class="w-6 h-6 rounded-full bg-primary-container text-white flex items-center justify-center shadow-xs">
+<span class="material-symbols-outlined text-[14px]">school</span>
+</div>
+<span class="font-label-md text-label-md font-semibold text-on-surface">SawaalNow Academic Assistant</span>
+</div>
+<div class="bg-surface-container-lowest border-2 border-[#FEF3C7] rounded-2xl rounded-bl-[4px] p-4 shadow-sm flex flex-col gap-3">
+<!-- Warning Status Badge -->
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#FEF3C7] text-[#B45309] w-fit font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">warning</span>
+          Information Not Verified in Official Records
+        </div>
+<p class="font-body-md text-body-md text-on-surface leading-normal">
+          I couldn't verify this from the available college information. Hostel Rule §7.1 governs standard residence allocation based on distance from permanent parental residence, but it <span class="font-semibold text-on-surface">does not contain automatic waivers for local relatives</span>.
+        </p>
+<!-- Academic Guardrail Note -->
+<div class="bg-surface-container-low rounded-lg p-2.5 flex items-start gap-2 border border-outline-variant/40">
+<span class="material-symbols-outlined text-[16px] text-primary mt-0.5">policy</span>
+<p class="font-caption text-caption text-on-surface-variant">
+<strong class="font-semibold text-on-surface">Strict institutional guardrail:</strong> SawaalNow only quotes approved rules to prevent misinformation regarding financial commitments and housing rights.
+          </p>
+</div>
+<!-- Resolution CTA Stack -->
+<div class="flex flex-col gap-2 pt-1">
+<button class="w-full h-10 px-4 rounded-lg bg-primary-container hover:bg-primary text-white font-label-md text-label-md font-semibold flex items-center justify-center gap-2 shadow-sm transition-all active:scale-[0.98]" onclick="document.getElementById('escalationModal').classList.remove('hidden')" type="button">
+<span class="material-symbols-outlined text-[18px]">support_agent</span>
+            Request human help
+          </button>
+<button class="w-full h-10 px-4 rounded-lg bg-surface-container-lowest border border-[#DCE3ED] hover:bg-surface-container-low text-on-surface font-label-md text-label-md font-semibold flex items-center justify-center gap-2 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-outline">search</span>
+            Ask another question
+          </button>
+</div>
+</div>
+<span class="font-caption text-caption text-on-surface-variant pl-1">SawaalNow • 10:21 AM</span>
+</div>
+</main>
+<!-- Interactive 'Request Human Help' Bottom Sheet Modal (Visible by Default to Showcase Mobile Experience) -->
+<div aria-labelledby="modal-headline" aria-modal="true" class="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-[#14213D]/60 backdrop-blur-xs transition-opacity" id="escalationModal" role="dialog">
+<div class="w-full max-w-md bg-surface-container-lowest rounded-t-2xl sm:rounded-2xl max-h-[92vh] flex flex-col shadow-2xl overflow-hidden border-t sm:border border-[#DCE3ED]">
+<!-- Modal Header -->
+<div class="px-4 pt-4 pb-3 border-b border-[#DCE3ED] flex items-start justify-between bg-surface-container-low/40">
+<div>
+<div class="flex items-center gap-1.5 text-primary mb-0.5">
+<span class="material-symbols-outlined text-[18px]">contact_support</span>
+<span class="font-caption text-caption uppercase tracking-wider font-bold">Ticket Escalation</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface" id="modal-headline">Request Human Help from Campus Admin</h2>
+<p class="font-body-md text-body-md text-on-surface-variant text-xs mt-0.5">Your unresolved query will be forwarded to the Office of the Registrar.</p>
+</div>
+<button aria-label="Close dialog" class="w-8 h-8 rounded-full flex items-center justify-center text-outline hover:text-on-surface hover:bg-surface-container transition-colors" onclick="document.getElementById('escalationModal').classList.add('hidden')" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Modal Body (Scrollable Form) -->
+<div class="p-4 overflow-y-auto space-y-4">
+<!-- Prefilled Question -->
+<div>
+<label class="block font-label-md text-label-md font-semibold text-on-surface mb-1">Unresolved Student Query</label>
+<div class="bg-surface-container-low p-2.5 rounded-lg border border-[#DCE3ED] text-on-surface font-body-md text-body-md">
+            “Can I get a fee waiver for hostel if my uncle lives 5km away?”
+          </div>
+<p class="font-caption text-caption text-outline mt-1">Directly extracted from your current conversation session.</p>
+</div>
+<!-- Verified Student Metadata -->
+<div class="grid grid-cols-2 gap-2 bg-[#E7F2FF]/40 p-3 rounded-lg border border-[#E7F2FF]">
+<div>
+<span class="block font-caption text-caption text-outline">Student Name</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">Aarav Sharma</span>
+<span class="inline-block text-[10px] text-primary font-mono mt-0.5">ID: #STU-2026-8812</span>
+</div>
+<div>
+<span class="block font-caption text-caption text-outline">Verified Contact</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate block">aarav.sharma@college.edu</span>
+<span class="text-[11px] text-on-surface-variant font-mono">+91 98765 43210</span>
+</div>
+</div>
+<!-- Department Target Selection -->
+<div>
+<label class="block font-label-md text-label-md font-semibold text-on-surface mb-1" for="deptSelect">Target Department Desk</label>
+<div class="relative">
+<select class="w-full h-11 px-3 pr-8 rounded-lg bg-surface-container-lowest border border-[#DCE3ED] font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none appearance-none" id="deptSelect">
+<option selected="">Registrar / Hostel Warden Office</option>
+<option>Dean of Student Welfare (DSW)</option>
+<option>Admissions &amp; Verification Committee</option>
+<option>Accounts &amp; Scholarship Cell</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 text-outline pointer-events-none text-[18px]">arrow_drop_down</span>
+</div>
+</div>
+<!-- Student Additional Context (Optional) -->
+<div>
+<label class="block font-label-md text-label-md font-semibold text-on-surface mb-1" for="additionalContext">Additional details (Optional)</label>
+<textarea class="w-full p-2.5 rounded-lg bg-surface-container-lowest border border-[#DCE3ED] font-body-md text-body-md text-on-surface placeholder:text-outline focus:border-primary focus:ring-1 focus:ring-primary outline-none resize-none" id="additionalContext" placeholder="Mention application ID, hostel block preference, or local guardian affidavits..." rows="2"></textarea>
+</div>
+<!-- Mandatory Privacy Consent -->
+<label class="flex items-start gap-2.5 p-2 rounded-lg bg-surface-container-low/50 border border-outline-variant/30 cursor-pointer">
+<input checked="" class="mt-0.5 rounded text-primary focus:ring-primary border-[#DCE3ED] w-4 h-4" type="checkbox"/>
+<span class="font-caption text-caption text-on-surface-variant leading-relaxed">
+            I consent to sharing my query and college contact details with the administrative desk for ticket resolution.
+          </span>
+</label>
+<!-- Resolution SLA Notice -->
+<div class="flex items-center gap-2 text-primary bg-primary-fixed/20 p-2 rounded-lg">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span class="font-caption text-caption font-medium">Tickets receive official email responses within 1-2 working college days.</span>
+</div>
+</div>
+<!-- Modal Footer Action Bar -->
+<div class="p-4 border-t border-[#DCE3ED] bg-surface-container-low/40 flex items-center gap-3">
+<button class="flex-1 h-11 px-4 rounded-lg bg-surface-container-lowest border border-[#DCE3ED] text-on-surface font-label-md text-label-md font-semibold hover:bg-surface-container transition-colors" onclick="document.getElementById('escalationModal').classList.add('hidden')" type="button">
+          Cancel
+        </button>
+<button class="flex-1 h-11 px-4 rounded-lg bg-primary-container hover:bg-primary text-white font-label-md text-label-md font-semibold flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition-all" onclick="alert('Ticket #ESC-4091 has been logged and routed to Hostel Warden Office. You will receive updates via student email.'); document.getElementById('escalationModal').classList.add('hidden');" type="button">
+<span class="material-symbols-outlined text-[18px]">send</span>
+          Submit Escalation Ticket
+        </button>
+</div>
+</div>
+</div>
+<!-- Bottom Docked Message Input & Suggestion Chips -->
+<footer class="fixed bottom-0 left-0 w-full z-30 bg-surface-container-lowest border-t border-[#DCE3ED] shadow-lg">
+<div class="max-w-md mx-auto px-3 pt-2.5 pb-3 flex flex-col gap-2">
+<!-- Suggestion Chips Rail -->
+<div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
+<span class="font-caption text-caption text-outline shrink-0 font-medium pl-1">Suggested:</span>
+<button class="shrink-0 px-3 py-1 rounded-full bg-[#E7F2FF] text-primary hover:bg-primary hover:text-white font-label-sm text-label-sm font-semibold transition-colors" type="button">
+          Hostel fee rebate
+        </button>
+<button class="shrink-0 px-3 py-1 rounded-full bg-[#E7F2FF] text-primary hover:bg-primary hover:text-white font-label-sm text-label-sm font-semibold transition-colors" type="button">
+          लायब्रेरी कार्ड
+        </button>
+<button class="shrink-0 px-3 py-1 rounded-full bg-[#E7F2FF] text-primary hover:bg-primary hover:text-white font-label-sm text-label-sm font-semibold transition-colors" type="button">
+          Exam dates
+        </button>
+</div>
+<!-- Main Input Composer -->
+<div class="relative flex items-center bg-surface-container-lowest rounded-xl border border-[#DCE3ED] shadow-inner focus-within:border-primary focus-within:ring-2 focus-within:ring-[#E7F2FF] transition-all">
+<textarea class="w-full py-2.5 pl-3.5 pr-12 font-body-md text-body-md text-on-surface placeholder:text-outline bg-transparent border-0 focus:ring-0 resize-none h-11 leading-snug" placeholder="Ask a question in English or Hindi..." rows="1"></textarea>
+<!-- Nested Action Trigger -->
+<button aria-label="Send message to SawaalNow" class="absolute right-1.5 w-8 h-8 rounded-lg bg-primary-container text-white flex items-center justify-center hover:bg-primary active:scale-95 transition-transform shadow-xs" type="button">
+<span class="material-symbols-outlined text-[18px]">arrow_upward</span>
+</button>
+</div>
+<!-- Grounding Safety Footer Note -->
+<div class="flex items-center justify-between px-1">
+<span class="font-caption text-[10px] text-outline">0 / 1,000</span>
+<div class="flex items-center gap-1 font-caption text-[10px] text-outline">
+<span class="material-symbols-outlined text-[12px] text-primary" style="font-variation-settings: 'FILL' 1;">security</span>
+<span>Verified against 2026 Academic Code</span>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

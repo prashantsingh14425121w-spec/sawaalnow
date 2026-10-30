@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SawaalNow - Campus AI Support</title>
+<!-- Inter Google Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 with Forms & Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config verbatim from system requirements -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary-container": "#d7e0ff",
+            "on-error": "#ffffff",
+            "on-secondary-fixed": "#0d1b36",
+            "tertiary-fixed-dim": "#bdc8d4",
+            "on-tertiary": "#ffffff",
+            "on-error-container": "#93000a",
+            "secondary": "#525e7d",
+            "on-secondary-fixed-variant": "#3a4664",
+            "background": "#f7f9fc",
+            "on-tertiary-fixed": "#121d26",
+            "surface-container": "#eceef1",
+            "on-surface-variant": "#424654",
+            "tertiary-fixed": "#d9e4f0",
+            "on-primary-fixed-variant": "#0040a0",
+            "surface-container-low": "#f2f4f7",
+            "surface-bright": "#f7f9fc",
+            "error-container": "#ffdad6",
+            "secondary-fixed": "#d9e2ff",
+            "surface": "#f7f9fc",
+            "error": "#ba1a1a",
+            "outline": "#737785",
+            "inverse-surface": "#2d3133",
+            "primary-fixed": "#dae2ff",
+            "tertiary": "#424d57",
+            "on-primary-fixed": "#001847",
+            "on-primary": "#ffffff",
+            "surface-tint": "#0957ce",
+            "surface-variant": "#e0e3e6",
+            "on-tertiary-fixed-variant": "#3d4852",
+            "primary-fixed-dim": "#b1c5ff",
+            "inverse-primary": "#b1c5ff",
+            "surface-container-highest": "#e0e3e6",
+            "on-secondary": "#ffffff",
+            "surface-container-lowest": "#ffffff",
+            "tertiary-container": "#5a6570",
+            "primary-container": "#175cd3",
+            "on-surface": "#191c1e",
+            "secondary-container": "#cdd9fe",
+            "surface-container-high": "#e6e8eb",
+            "surface-dim": "#d8dadd",
+            "on-secondary-container": "#525f7e",
+            "on-tertiary-container": "#d7e2ef",
+            "outline-variant": "#c3c6d6",
+            "inverse-on-surface": "#eff1f4",
+            "on-background": "#191c1e",
+            "primary": "#0045a9",
+            "secondary-fixed-dim": "#b9c6ea"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xs": "0.25rem",
+            "space-xl": "2rem",
+            "space-base": "1rem",
+            "margin": "1rem",
+            "margin-tablet": "1.5rem",
+            "gutter-desktop": "1.5rem",
+            "space-lg": "1.5rem",
+            "space-2xl": "3rem",
+            "space-md": "0.75rem",
+            "margin-desktop": "2rem",
+            "space-sm": "0.5rem",
+            "gutter": "1rem"
+          },
+          "fontFamily": {
+            "headline-xl-mobile": ["Inter"],
+            "body-md": ["Inter"],
+            "caption": ["Inter"],
+            "headline-lg": ["Inter"],
+            "label-sm": ["Inter"],
+            "headline-md": ["Inter"],
+            "headline-xl": ["Inter"],
+            "body-md-medium": ["Inter"],
+            "body-lg": ["Inter"],
+            "title-md": ["Inter"],
+            "label-md": ["Inter"]
+          },
+          "fontSize": {
+            "headline-xl-mobile": ["26px", { "lineHeight": "34px", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "caption": ["11px", { "lineHeight": "14px", "fontWeight": "500" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "headline-xl": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+            "body-md-medium": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "label-md": ["13px", { "lineHeight": "18px", "fontWeight": "500" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      font-size: 20px;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      height: 4px;
+      width: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #c3c6d6;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md antialiased min-h-screen flex flex-col justify-between selection:bg-secondary-container">
+<!-- Interactive State Control Bar (Sticky top bar for testing all edge cases) -->
+<aside aria-label="Development State Switcher" class="bg-surface-container-lowest border-b border-surface-variant z-40 sticky top-0 px-3 py-2 shadow-sm">
+<div class="max-w-md mx-auto flex items-center justify-between gap-2">
+<div class="flex items-center gap-1.5 shrink-0">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="tune">tune</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider text-[10px]">Test Viewports:</span>
+</div>
+<div class="flex items-center gap-1 overflow-x-auto custom-scroll py-1 shrink">
+<button class="state-tab-btn px-2.5 py-1 rounded-lg font-label-sm text-label-sm bg-primary text-on-primary shadow-xs transition-colors shrink-0" id="btn-tab-1" onclick="switchState(1)" type="button">1. Empty State</button>
+<button class="state-tab-btn px-2.5 py-1 rounded-lg font-label-sm text-label-sm bg-surface-container-low text-on-surface-variant hover:bg-surface-container transition-colors shrink-0" id="btn-tab-2" onclick="switchState(2)" type="button">2. Processing</button>
+<button class="state-tab-btn px-2.5 py-1 rounded-lg font-label-sm text-label-sm bg-surface-container-low text-on-surface-variant hover:bg-surface-container transition-colors shrink-0" id="btn-tab-3" onclick="switchState(3)" type="button">3. Verified Hindi</button>
+<button class="state-tab-btn px-2.5 py-1 rounded-lg font-label-sm text-label-sm bg-surface-container-low text-on-surface-variant hover:bg-surface-container transition-colors shrink-0" id="btn-tab-4" onclick="switchState(4)" type="button">4. AI Timeout</button>
+<button class="state-tab-btn px-2.5 py-1 rounded-lg font-label-sm text-label-sm bg-surface-container-low text-on-surface-variant hover:bg-surface-container transition-colors shrink-0" id="btn-tab-5" onclick="switchState(5)" type="button">5. Offline Cache</button>
+</div>
+</div>
+</aside>
+<!-- Container Max Width (Mobile Viewport Simulator) -->
+<div class="w-full max-w-md mx-auto flex-1 flex flex-col bg-surface-container-lowest min-h-[calc(100vh-42px)] border-x border-surface-variant shadow-sm relative pb-20">
+<!-- TopAppBar (from Shared Components JSON) -->
+<header class="bg-surface-container-lowest dark:bg-inverse-surface border-b border-surface-variant dark:border-outline flat no shadows docked full-width top-0 sticky z-30">
+<div class="flex justify-between items-center w-full px-4 h-16">
+<!-- Logo Cluster -->
+<div class="flex items-center gap-2.5">
+<img alt="SawaalNow Campus AI Support Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1VzZIIeTsbrH-XEQwJfFAz5AQ0EA7rNyp453jmN_5mQmGqQ2wFRgUDG-HkTB59WVmg5EdM44RuMT5f83_WL14yERQvr0g6OykOr0wW5rsHLiMeRupOhJTpBCdt5iPKSk4oamgLKddNJwMTS3LQUEDhcekhZ_CUKwOhSj2vjTiZQozpEGIshUOb3xFjxC1V2zfwU6hj2MQ3p34Op10-SXS3p_dW_nLCanAJ_-U5VTlw"/>
+</div>
+<!-- Trailing Multilingual Action -->
+<button aria-label="Switch Language" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-surface-variant text-primary font-label-md text-label-md hover:bg-surface-container-low transition-colors duration-150 ease-in-out min-h-[36px]" type="button">
+<span class="material-symbols-outlined text-primary text-base" data-icon="translate">translate</span>
+<span>English / हिंदी</span>
+<span class="material-symbols-outlined text-outline text-xs" data-icon="expand_more">expand_more</span>
+</button>
+</div>
+<!-- Campus Verification Sub-bar -->
+<div class="bg-surface-container-low px-4 py-1.5 flex items-center justify-between border-t border-surface-variant/40">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="font-caption text-caption text-on-surface-variant">Ground Truth: University Ordinances 2025-26</span>
+</div>
+<span class="font-caption text-caption text-primary font-semibold flex items-center gap-0.5">
+<span class="material-symbols-outlined text-xs" data-icon="verified">verified</span>
+          Verified
+        </span>
+</div>
+</header>
+<!-- Main Content Area: Dynamic States Canvas -->
+<main class="flex-1 flex flex-col px-4 pt-3 pb-4">
+<!-- ========================================== -->
+<!-- STATE 1: Empty Chat State                  -->
+<!-- ========================================== -->
+<section class="chat-viewport flex flex-col flex-1 justify-center py-6 text-center" id="viewport-state-1">
+<!-- Empty Illustration & Shield -->
+<div class="mx-auto mb-4 w-16 h-16 rounded-2xl bg-secondary-container/50 border border-secondary-container flex items-center justify-center text-primary shadow-xs">
+<span class="material-symbols-outlined text-3xl text-primary" data-icon="verified_user">verified_user</span>
+</div>
+<h1 class="font-headline-xl-mobile text-headline-xl-mobile text-on-surface tracking-tight mb-2">
+          Ask anything about your college
+        </h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xs mx-auto mb-6">
+          Official real-time answers grounded strictly on university ordinances, fee gazettes, and academic regulations.
+        </p>
+<!-- Question Suggestion Chips -->
+<div class="flex flex-col gap-2.5 text-left w-full max-w-sm mx-auto">
+<p class="font-caption text-caption text-outline uppercase tracking-wider font-semibold mb-1">Frequently asked by students:</p>
+<button class="w-full text-left p-3 rounded-xl border border-surface-variant bg-surface hover:bg-secondary-container/20 transition-all flex items-center justify-between group min-h-[44px]" onclick="selectSuggestion('What documents are required for admission?')" type="button">
+<span class="font-body-md-medium text-body-md-medium text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="description">description</span>
+              What documents are required for admission?
+            </span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-base" data-icon="north_east">north_east</span>
+</button>
+<button class="w-full text-left p-3 rounded-xl border border-surface-variant bg-surface hover:bg-secondary-container/20 transition-all flex items-center justify-between group min-h-[44px]" onclick="selectSuggestion('कॉलेज के कार्यालय का समय क्या है?')" type="button">
+<span class="font-body-md-medium text-body-md-medium text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="schedule">schedule</span>
+              कॉलेज के कार्यालय का समय क्या है?
+            </span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-base" data-icon="north_east">north_east</span>
+</button>
+<button class="w-full text-left p-3 rounded-xl border border-surface-variant bg-surface hover:bg-secondary-container/20 transition-all flex items-center justify-between group min-h-[44px]" onclick="selectSuggestion('How can I contact the helpdesk?')" type="button">
+<span class="font-body-md-medium text-body-md-medium text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="contact_support">contact_support</span>
+              How can I contact the helpdesk?
+            </span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-base" data-icon="north_east">north_east</span>
+</button>
+</div>
+<div class="mt-8 inline-flex items-center justify-center gap-2 text-outline font-caption text-caption">
+<span class="material-symbols-outlined text-sm text-outline" data-icon="lock">lock</span>
+<span>Zero fabrication policy active • No unverified AI output</span>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- STATE 2: Assistant Processing / Streaming  -->
+<!-- ========================================== -->
+<section class="chat-viewport hidden flex-col flex-1 gap-4 py-2" id="viewport-state-2">
+<!-- User Query Bubble -->
+<div class="flex flex-col items-end self-end max-w-[85%]">
+<div class="bg-[#14213D] text-white p-3.5 rounded-2xl rounded-br-[4px] shadow-xs">
+<p class="font-body-md text-body-md text-white">Can I change my elective subject in the 3rd semester after fee confirmation?</p>
+</div>
+<div class="flex items-center gap-1 mt-1 text-on-surface-variant font-caption text-caption pr-1">
+<span>You</span>
+<span>•</span>
+<time>10:42 AM</time>
+</div>
+</div>
+<!-- Assistant Status & Processing Bubble -->
+<div class="flex flex-col items-start self-start max-w-[95%] w-full">
+<div class="w-full bg-surface-container-lowest border border-surface-variant p-4 rounded-2xl rounded-bl-[4px] shadow-xs">
+<div class="flex items-center justify-between pb-3 mb-3 border-b border-surface-variant/60">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl animate-spin" data-icon="progress_activity">progress_activity</span>
+<span class="font-title-md text-title-md text-on-surface">Grounding query...</span>
+</div>
+<button class="text-error hover:text-on-error-container font-label-sm text-label-sm px-2 py-1 rounded border border-error/30 hover:bg-error-container/40 transition-colors flex items-center gap-1 min-h-[32px]" type="button">
+<span class="material-symbols-outlined text-sm" data-icon="close">close</span>
+                Cancel
+              </button>
+</div>
+<p class="font-body-md-medium text-body-md-medium text-primary mb-2 flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+              Searching Dean of Academic Affairs regulations &amp; gazettes...
+            </p>
+<div class="space-y-2 mt-3">
+<div class="h-3 bg-secondary-container/40 rounded-full w-4/5 animate-pulse"></div>
+<div class="h-3 bg-secondary-container/30 rounded-full w-full animate-pulse"></div>
+<div class="h-3 bg-secondary-container/20 rounded-full w-3/5 animate-pulse"></div>
+</div>
+<div class="mt-4 pt-3 border-t border-surface-variant/50 flex items-center gap-2">
+<div class="flex gap-1">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-bounce"></span>
+<span class="w-2 h-2 rounded-full bg-primary-container animate-bounce" style="animation-delay: 0.15s"></span>
+<span class="w-2 h-2 rounded-full bg-primary-container animate-bounce" style="animation-delay: 0.3s"></span>
+</div>
+<span class="font-caption text-caption text-outline">Synthesizing verified clause (§14.b)</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 mt-1 text-on-surface-variant font-caption text-caption pl-1">
+<span class="material-symbols-outlined text-primary text-xs" data-icon="smart_toy">smart_toy</span>
+<span>SawaalNow Academic Assistant</span>
+<span>•</span>
+<span>Streaming</span>
+</div>
+</div>
+</section>
+<!-- ======================================================= -->
+<!-- STATE 3: Verified Citation with Multi-line Long Hindi   -->
+<!-- ======================================================= -->
+<section class="chat-viewport hidden flex-col flex-1 gap-4 py-2" id="viewport-state-3">
+<!-- User Query Bubble -->
+<div class="flex flex-col items-end self-end max-w-[85%]">
+<div class="bg-[#14213D] text-white p-3.5 rounded-2xl rounded-br-[4px] shadow-xs">
+<p class="font-body-md text-body-md text-white">स्नातक प्रवेश के लिए कौन से दस्तावेज अनिवार्य हैं?</p>
+</div>
+<div class="flex items-center gap-1 mt-1 text-on-surface-variant font-caption text-caption pr-1">
+<span>You</span>
+<span>•</span>
+<time>11:05 AM</time>
+</div>
+</div>
+<!-- Assistant Answer Bubble -->
+<div class="flex flex-col items-start self-start w-full">
+<div class="bg-surface-container-lowest border border-surface-variant p-4 rounded-2xl rounded-bl-[4px] shadow-xs w-full">
+<!-- Badge & Language script token -->
+<div class="flex items-center justify-between gap-2 mb-2 pb-2 border-b border-surface-variant/50">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-sm text-emerald-700" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                Verified Academic Source
+              </span>
+<span class="font-caption text-caption text-outline">Hindi (हिंदी)</span>
+</div>
+<!-- Long Hindi Content with proper typographic rhythm -->
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold mb-2">
+              स्नातक पाठ्यक्रम में प्रवेश हेतु आवश्यक प्रमाण-पत्र एवं काउंसलिंग प्रक्रिया 2025-26
+            </h2>
+<p class="font-body-md text-body-md text-on-surface mb-3 leading-relaxed">
+              विश्वविद्यालय अध्यादेश 2025-26 की धारा 4.2 के अनुसार, प्रथम वर्ष स्नातक में सीट पुष्टि (Seat Confirmation) हेतु निम्नांकित मूल दस्तावेज भौतिक सत्यापन (Physical Verification) के समय प्रस्तुत करना अनिवार्य है:
+            </p>
+<ul class="space-y-1.5 mb-4 pl-2 font-body-md text-body-md text-on-surface">
+<li class="flex items-start gap-2">
+<span class="text-primary font-bold">•</span>
+<span>कक्षा 10वीं एवं 12वीं की मूल अंकतालिका तथा 3 स्व-हस्ताक्षरित प्रतियां।</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="text-primary font-bold">•</span>
+<span>विद्यालय परित्याग प्रमाण पत्र (Transfer Certificate) एवं चरित्र प्रमाण पत्र।</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="text-primary font-bold">•</span>
+<span>सक्षम अधिकारी द्वारा निर्गत वैध जाति/ईडब्ल्यूएस प्रमाण पत्र (यदि लागू हो)।</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="text-primary font-bold">•</span>
+<span>ऑनलाइन पंजीकरण शुल्क रसीद व आवंटित सीट का कन्फर्मेशन पत्रक।</span>
+</li>
+</ul>
+<!-- Verified Citation Accordion Card -->
+<div class="bg-surface border border-surface-variant rounded-xl p-3 mb-3">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-base" data-icon="menu_book">menu_book</span>
+<span class="font-label-sm text-label-sm font-semibold">Verified Source Citation</span>
+</div>
+<span class="font-caption text-caption bg-secondary-container text-on-secondary-fixed-variant px-1.5 py-0.5 rounded font-medium">Ordinance Ref</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-1">
+<strong>Ordinance 2025-26, Section 4.2</strong>: "Documentary Prerequisites for First Year Admissions and Counseling Protocol."
+              </p>
+<div class="flex items-center gap-3 pt-2 text-primary font-label-sm text-label-sm">
+<a class="inline-flex items-center gap-1 hover:underline min-h-[32px]" href="#">
+<span>Open PDF Gazette</span>
+<span class="material-symbols-outlined text-sm" data-icon="open_in_new">open_in_new</span>
+</a>
+<span class="text-outline">•</span>
+<span class="text-outline">Ratified: 15 Jan 2025</span>
+</div>
+</div>
+<!-- Feedback Controls -->
+<div class="pt-2 border-t border-surface-variant/50 flex items-center justify-between text-on-surface-variant">
+<span class="font-caption text-caption">Was this response accurate?</span>
+<div class="flex items-center gap-2">
+<button aria-label="Helpful" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg border border-surface-variant hover:bg-surface-container-low text-on-surface transition-colors min-h-[36px]" type="button">
+<span class="material-symbols-outlined text-sm text-emerald-600" data-icon="thumb_up">thumb_up</span>
+<span class="font-label-sm text-label-sm">Helpful</span>
+</button>
+<button aria-label="Not helpful" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg border border-surface-variant hover:bg-surface-container-low text-on-surface transition-colors min-h-[36px]" type="button">
+<span class="material-symbols-outlined text-sm text-error" data-icon="thumb_down">thumb_down</span>
+<span class="font-label-sm text-label-sm">Report</span>
+</button>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-1 mt-1 text-on-surface-variant font-caption text-caption pl-1">
+<span>SawaalNow v2.4</span>
+<span>•</span>
+<time>11:05 AM</time>
+</div>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- STATE 4: AI Timeout / Rate Limit Banner    -->
+<!-- ========================================== -->
+<section class="chat-viewport hidden flex-col flex-1 gap-4 py-2" id="viewport-state-4">
+<!-- User Query Bubble -->
+<div class="flex flex-col items-end self-end max-w-[85%]">
+<div class="bg-[#14213D] text-white p-3.5 rounded-2xl rounded-br-[4px] shadow-xs">
+<p class="font-body-md text-body-md text-white">Can foreign degree transfer credits be applied to semester 4?</p>
+</div>
+<div class="flex items-center gap-1 mt-1 text-on-surface-variant font-caption text-caption pr-1">
+<span>You</span>
+<span>•</span>
+<time>11:18 AM</time>
+</div>
+</div>
+<!-- Timeout Alert Banner -->
+<div class="w-full bg-[#FFFBEB] border border-amber-300 border-l-4 border-l-amber-600 rounded-xl p-4 shadow-xs">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-amber-600 text-2xl shrink-0 mt-0.5" data-icon="hourglass_empty">hourglass_empty</span>
+<div class="flex-1">
+<h3 class="font-title-md text-title-md text-amber-900 mb-1">
+                AI Service Busy: Verification Timeout
+              </h3>
+<p class="font-body-md text-body-md text-amber-800 mb-3 leading-relaxed">
+                The academic knowledge retrieval timed out after 15 seconds. Per institutional policy, <strong>no answer was fabricated</strong> without full ordinance verification.
+              </p>
+<!-- Resolution Actions -->
+<div class="flex flex-wrap gap-2.5">
+<button class="bg-primary text-on-primary px-3.5 py-2 rounded-lg font-label-md text-label-md flex items-center gap-1.5 shadow-xs hover:bg-[#144FB8] transition-colors min-h-[44px]" type="button">
+<span class="material-symbols-outlined text-sm" data-icon="refresh">refresh</span>
+                  Retry Query
+                </button>
+<button class="bg-surface-container-lowest border border-amber-300 text-amber-950 px-3.5 py-2 rounded-lg font-label-md text-label-md flex items-center gap-1.5 hover:bg-amber-100/60 transition-colors min-h-[44px]" type="button">
+<span class="material-symbols-outlined text-sm" data-icon="support_agent">support_agent</span>
+                  Escalate to Campus Admin
+                </button>
+</div>
+</div>
+</div>
+</div>
+<div class="p-3 bg-surface-container-low rounded-lg border border-surface-variant text-center">
+<span class="font-caption text-caption text-on-surface-variant">Queue status: Dean Academic Affairs Repository server high load (Response latency ~18s).</span>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- STATE 5: Network Offline & Validation State -->
+<!-- ========================================== -->
+<section class="chat-viewport hidden flex-col flex-1 gap-4 py-2" id="viewport-state-5">
+<!-- Network Offline Alert Banner -->
+<div class="w-full bg-[#FEF2F2] border border-red-200 border-l-4 border-l-red-600 rounded-xl p-4 shadow-xs">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-red-600 text-2xl shrink-0" data-icon="wifi_off">wifi_off</span>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<h3 class="font-title-md text-title-md text-red-900">
+                  Network Connection Lost
+                </h3>
+<span class="bg-red-100 text-red-800 text-[10px] font-bold px-2 py-0.5 rounded-full">OFFLINE</span>
+</div>
+<p class="font-body-md text-body-md text-red-800 mt-1 mb-3">
+                Offline cache active for previously downloaded regulations. Live real-time inquiries are paused until signal returns.
+              </p>
+<button class="bg-white border border-red-300 text-red-900 px-3.5 py-2 rounded-lg font-label-md text-label-md flex items-center gap-1.5 hover:bg-red-50 transition-colors min-h-[44px]" type="button">
+<span class="material-symbols-outlined text-sm" data-icon="sync">sync</span>
+                Check &amp; Reconnect
+              </button>
+</div>
+</div>
+</div>
+<!-- Cached Previous Query Card -->
+<div class="border border-surface-variant rounded-xl p-3 bg-surface-container-low opacity-80">
+<div class="flex items-center justify-between mb-1">
+<span class="font-caption text-caption text-on-surface-variant font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-outline" data-icon="save">save</span>
+              Cached Academic Notice
+            </span>
+<span class="font-caption text-caption text-outline">Offline read-only</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface">
+            Hostel allotment lists for Odd Semester 2025 are available on the central college notice board.
+          </p>
+</div>
+</section>
+</main>
+<!-- Interactive Chat Input & Validation Dock (Sticky above bottom nav) -->
+<div class="sticky bottom-16 bg-surface-container-lowest border-t border-surface-variant p-3 z-20">
+<!-- Multilingual Suggestion Chips Carousel -->
+<div class="flex items-center gap-2 overflow-x-auto custom-scroll pb-2 mb-1">
+<button class="whitespace-nowrap px-3 py-1.5 rounded-lg bg-[#E7F2FF] text-[#175CD3] hover:bg-[#175CD3] hover:text-white font-label-sm text-label-sm transition-colors min-h-[32px]" onclick="selectSuggestion('Library fine rules?')" type="button">
+          Library fine rules?
+        </button>
+<button class="whitespace-nowrap px-3 py-1.5 rounded-lg bg-[#E7F2FF] text-[#175CD3] hover:bg-[#175CD3] hover:text-white font-label-sm text-label-sm transition-colors min-h-[32px]" onclick="selectSuggestion('हॉस्टल शुल्क विवरण')" type="button">
+          हॉस्टल शुल्क विवरण
+        </button>
+<button class="whitespace-nowrap px-3 py-1.5 rounded-lg bg-[#E7F2FF] text-[#175CD3] hover:bg-[#175CD3] hover:text-white font-label-sm text-label-sm transition-colors min-h-[32px]" onclick="selectSuggestion('Scholarship deadline 2025?')" type="button">
+          Scholarship deadline 2025?
+        </button>
+</div>
+<!-- Input Field with Inline Error Support for State 5 -->
+<form class="relative" id="chat-form" onsubmit="event.preventDefault(); handleSend();">
+<div class="flex items-end gap-2 bg-surface rounded-xl border border-surface-variant focus-within:border-primary focus-within:ring-2 focus-within:ring-[#E7F2FF] transition-all p-1.5">
+<textarea class="w-full bg-transparent border-0 resize-none font-body-md text-body-md text-on-surface placeholder:text-outline focus:ring-0 p-2 min-h-[40px] max-h-24" id="chat-input" placeholder="Ask your college question (English or हिंदी)..." rows="1"></textarea>
+<div class="flex items-center gap-1 shrink-0 pb-1 pr-1">
+<button aria-label="Voice input" class="w-9 h-9 rounded-lg text-outline hover:text-primary hover:bg-surface-container flex items-center justify-center transition-colors min-w-[36px] min-h-[36px]" type="button">
+<span class="material-symbols-outlined text-xl" data-icon="mic">mic</span>
+</button>
+<button aria-label="Send query" class="w-9 h-9 rounded-lg bg-primary hover:bg-[#144FB8] text-white flex items-center justify-center transition-colors shadow-xs min-w-[36px] min-h-[36px]" type="submit">
+<span class="material-symbols-outlined text-lg" data-icon="send">send</span>
+</button>
+</div>
+</div>
+<!-- Inline Validation Warning (Dynamic display in State 5) -->
+<p class="hidden text-error font-caption text-caption mt-1.5 flex items-center gap-1" id="input-error">
+<span class="material-symbols-outlined text-xs" data-icon="error">error</span>
+<span>Please enter at least 5 characters before submitting</span>
+</p>
+</form>
+</div>
+<!-- BottomNavBar (from Shared Components JSON: docked full-width bottom-0, destination_count 4, active Advisor) -->
+<nav aria-label="Primary Mobile Navigation" class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-16 px-4 bg-surface-container-lowest dark:bg-inverse-surface border-t border-surface-variant dark:border-outline md:hidden shadow-sm">
+<!-- 1. Advisor (Active) -->
+<button class="flex flex-col items-center justify-center text-primary dark:text-inverse-primary font-semibold active:scale-95 transition-transform duration-100 min-h-[44px] min-w-[56px]" type="button">
+<span class="material-symbols-outlined text-2xl" data-icon="chat_bubble" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+<span class="font-label-sm text-label-sm mt-0.5">Advisor</span>
+</button>
+<!-- 2. Directory (Inactive) -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary dark:hover:text-primary-fixed transition-colors active:scale-95 duration-100 min-h-[44px] min-w-[56px]" type="button">
+<span class="material-symbols-outlined text-2xl" data-icon="school">school</span>
+<span class="font-label-sm text-label-sm mt-0.5">Directory</span>
+</button>
+<!-- 3. Handbook (Inactive) -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary dark:hover:text-primary-fixed transition-colors active:scale-95 duration-100 min-h-[44px] min-w-[56px]" type="button">
+<span class="material-symbols-outlined text-2xl" data-icon="menu_book">menu_book</span>
+<span class="font-label-sm text-label-sm mt-0.5">Handbook</span>
+</button>
+<!-- 4. History (Inactive) -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary dark:hover:text-primary-fixed transition-colors active:scale-95 duration-100 min-h-[44px] min-w-[56px]" type="button">
+<span class="material-symbols-outlined text-2xl" data-icon="history">history</span>
+<span class="font-label-sm text-label-sm mt-0.5">History</span>
+</button>
+</nav>
+</div>
+<!-- Vanilla Micro-interaction Script for Viewport Switching -->
+<script>
+    function switchState(stateNumber) {
+      // Hide all viewports
+      for (let i = 1; i <= 5; i++) {
+        const vp = document.getElementById('viewport-state-' + i);
+        const btn = document.getElementById('btn-tab-' + i);
+        if (vp) vp.classList.add('hidden');
+        if (btn) {
+          btn.classList.remove('bg-primary', 'text-on-primary');
+          btn.classList.add('bg-surface-container-low', 'text-on-surface-variant');
+        }
+      }
+
+      // Show selected viewport
+      const activeVp = document.getElementById('viewport-state-' + stateNumber);
+      const activeBtn = document.getElementById('btn-tab-' + stateNumber);
+      if (activeVp) {
+        activeVp.classList.remove('hidden');
+        activeVp.classList.add('flex');
+      }
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-surface-container-low', 'text-on-surface-variant');
+        activeBtn.classList.add('bg-primary', 'text-on-primary');
+      }
+
+      // Contextual tweaks for State 5 (demonstrate inline validation)
+      const errBox = document.getElementById('input-error');
+      const input = document.getElementById('chat-input');
+      if (stateNumber === 5) {
+        errBox.classList.remove('hidden');
+        input.value = "Fees";
+      } else {
+        errBox.classList.add('hidden');
+      }
+    }
+
+    function selectSuggestion(text) {
+      const input = document.getElementById('chat-input');
+      input.value = text;
+      input.focus();
+    }
+
+    function handleSend() {
+      const input = document.getElementById('chat-input');
+      const errBox = document.getElementById('input-error');
+      if (input.value.trim().length < 5) {
+        errBox.classList.remove('hidden');
+      } else {
+        errBox.classList.add('hidden');
+        switchState(2); // Transition to Assistant Processing state
+      }
+    }
+  </script>
+</body></html>

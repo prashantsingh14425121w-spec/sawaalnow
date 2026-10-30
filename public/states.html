@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SawaalNow - Operational State Center &amp; System Workflows</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary-container": "#d7e0ff",
+            "on-error": "#ffffff",
+            "on-secondary-fixed": "#0d1b36",
+            "tertiary-fixed-dim": "#bdc8d4",
+            "on-tertiary": "#ffffff",
+            "on-error-container": "#93000a",
+            "secondary": "#525e7d",
+            "on-secondary-fixed-variant": "#3a4664",
+            "background": "#f7f9fc",
+            "on-tertiary-fixed": "#121d26",
+            "surface-container": "#eceef1",
+            "on-surface-variant": "#424654",
+            "tertiary-fixed": "#d9e4f0",
+            "on-primary-fixed-variant": "#0040a0",
+            "surface-container-low": "#f2f4f7",
+            "surface-bright": "#f7f9fc",
+            "error-container": "#ffdad6",
+            "secondary-fixed": "#d9e2ff",
+            "surface": "#f7f9fc",
+            "error": "#ba1a1a",
+            "outline": "#737785",
+            "inverse-surface": "#2d3133",
+            "primary-fixed": "#dae2ff",
+            "tertiary": "#424d57",
+            "on-primary-fixed": "#001847",
+            "on-primary": "#ffffff",
+            "surface-tint": "#0957ce",
+            "surface-variant": "#e0e3e6",
+            "on-tertiary-fixed-variant": "#3d4852",
+            "primary-fixed-dim": "#b1c5ff",
+            "inverse-primary": "#b1c5ff",
+            "surface-container-highest": "#e0e3e6",
+            "on-secondary": "#ffffff",
+            "surface-container-lowest": "#ffffff",
+            "tertiary-container": "#5a6570",
+            "primary-container": "#175cd3",
+            "on-surface": "#191c1e",
+            "secondary-container": "#cdd9fe",
+            "surface-container-high": "#e6e8eb",
+            "surface-dim": "#d8dadd",
+            "on-secondary-container": "#525f7e",
+            "on-tertiary-container": "#d7e2ef",
+            "outline-variant": "#c3c6d6",
+            "inverse-on-surface": "#eff1f4",
+            "on-background": "#191c1e",
+            "primary": "#0045a9",
+            "secondary-fixed-dim": "#b9c6ea"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xs": "0.25rem",
+            "space-xl": "2rem",
+            "space-base": "1rem",
+            "margin": "1rem",
+            "margin-tablet": "1.5rem",
+            "gutter-desktop": "1.5rem",
+            "space-lg": "1.5rem",
+            "space-2xl": "3rem",
+            "space-md": "0.75rem",
+            "margin-desktop": "2rem",
+            "space-sm": "0.5rem",
+            "gutter": "1rem"
+          },
+          "fontFamily": {
+            "headline-xl-mobile": ["Inter"],
+            "body-md": ["Inter"],
+            "caption": ["Inter"],
+            "headline-lg": ["Inter"],
+            "label-sm": ["Inter"],
+            "headline-md": ["Inter"],
+            "headline-xl": ["Inter"],
+            "body-md-medium": ["Inter"],
+            "body-lg": ["Inter"],
+            "title-md": ["Inter"],
+            "label-md": ["Inter"]
+          },
+          "fontSize": {
+            "headline-xl-mobile": ["26px", {"lineHeight": "34px", "fontWeight": "700"}],
+            "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+            "caption": ["11px", {"lineHeight": "14px", "fontWeight": "500"}],
+            "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+            "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+            "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+            "headline-xl": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+            "body-md-medium": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+            "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "title-md": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+            "label-md": ["13px", {"lineHeight": "18px", "fontWeight": "500"}]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .material-symbols-outlined.fill {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body-md selection:bg-secondary-container selection:text-on-secondary-fixed">
+<!-- Top Navigation Bar Anchor -->
+<header class="bg-surface-container-lowest sticky top-0 z-40 border-b border-outline-variant shadow-sm">
+<div class="flex justify-between items-center w-full px-4 md:px-8 max-w-7xl mx-auto h-16">
+<!-- Logo and Department Identifier -->
+<div class="flex items-center gap-6">
+<a class="flex items-center gap-3" href="#dashboard">
+<img alt="SawaalNow Campus AI Support Official Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1VzZIIeTsbrH-XEQwJfFAz5AQ0EA7rNyp453jmN_5mQmGqQ2wFRgUDG-HkTB59WVmg5EdM44RuMT5f83_WL14yERQvr0g6OykOr0wW5rsHLiMeRupOhJTpBCdt5iPKSk4oamgLKddNJwMTS3LQUEDhcekhZ_CUKwOhSj2vjTiZQozpEGIshUOb3xFjxC1V2zfwU6hj2MQ3p34Op10-SXS3p_dW_nLCanAJ_-U5VTlw"/>
+</a>
+<div class="hidden sm:flex items-center gap-2 border-l border-outline-variant pl-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-caption font-caption bg-surface-container text-on-surface-variant font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+            Registrar &amp; Academic Affairs
+          </span>
+<span class="text-caption font-caption text-secondary">Campus Node #04</span>
+</div>
+</div>
+<!-- Navigation Links from Shared Schema -->
+<nav aria-label="Campus AI Navigation" class="hidden md:flex items-center gap-6">
+<a class="text-on-surface-variant hover:text-on-surface pb-1 text-body-md font-body-md transition-colors duration-150" href="#chat">Chat</a>
+<a class="text-on-surface-variant hover:text-on-surface pb-1 text-body-md font-body-md transition-colors duration-150" href="#history">History</a>
+<a aria-current="page" class="border-b-2 border-primary-container text-primary-container font-semibold pb-1 text-body-md font-body-md" href="#citations">Knowledge Base</a>
+<a class="text-on-surface-variant hover:text-on-surface pb-1 text-body-md font-body-md transition-colors duration-150" href="#escalations">Escalations</a>
+</nav>
+<!-- Trailing Controls & Language Pill -->
+<div class="flex items-center gap-3">
+<!-- Language Switcher Pill -->
+<button aria-expanded="false" aria-haspopup="listbox" class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low transition-colors duration-150 text-body-md font-body-md-medium text-on-surface" type="button">
+<span class="material-symbols-outlined text-secondary text-[18px]">translate</span>
+<span class="text-label-md font-label-md">English / हिंदी / தமிழ்</span>
+<span class="material-symbols-outlined text-secondary text-[16px]">expand_more</span>
+</button>
+<!-- Notification Trigger -->
+<button aria-label="Campus Alert Notifications" class="relative p-2 rounded-lg text-secondary hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150" type="button">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full ring-2 ring-surface-container-lowest"></span>
+</button>
+<!-- Primary Action -->
+<a class="hidden sm:inline-flex items-center gap-2 bg-primary-container hover:bg-primary text-on-primary font-title-md text-title-md px-4 py-2 rounded-lg shadow-sm transition-all duration-150 active:scale-[0.98]" href="#new-inquiry">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>Ask Sawaal</span>
+</a>
+</div>
+</div>
+</header>
+<!-- Contextual Ribbon: Operational State Explorer -->
+<aside aria-label="System diagnostic mode notice" class="bg-surface-container-low border-b border-outline-variant py-2.5 px-4 md:px-8">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-2 text-label-sm font-label-sm">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary-container text-[18px]">verified</span>
+<span class="font-semibold text-on-surface">SawaalNow Node Verification Console:</span>
+<span>Simulating live edge-cases for synchronous ingestion, ticket dispatching, and localized cache integrity.</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container border border-outline-variant text-secondary text-caption font-caption">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span> System Cluster: Healthy
+        </span>
+<span class="text-secondary">Latency: 14ms</span>
+</div>
+</div>
+</aside>
+<!-- Main Canvas Container -->
+<main class="flex-1 max-w-7xl w-full mx-auto px-4 md:px-8 py-8 space-y-10">
+<!-- Section Intro & Page Descriptor -->
+<section class="space-y-2">
+<div class="flex flex-wrap items-center justify-between gap-4">
+<div>
+<h1 class="text-headline-xl font-headline-xl text-on-surface tracking-tight">System Feedback &amp; Resilience States</h1>
+<p class="text-body-lg font-body-lg text-secondary max-w-3xl">
+            Live behavioral validation of academic knowledge-sync mechanisms, localized browser persistence, and fallback pipelines for campus registrar routing.
+          </p>
+</div>
+<div class="flex items-center gap-2">
+<button class="inline-flex items-center gap-1.5 text-label-md font-label-md px-3 py-1.5 rounded-lg border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low text-on-surface shadow-sm" type="button">
+<span class="material-symbols-outlined text-[16px]">file_download</span>
+            Export Audit Log
+          </button>
+<button class="inline-flex items-center gap-1.5 text-label-md font-label-md px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface" type="button">
+<span class="material-symbols-outlined text-[16px]">refresh</span>
+            Run Diagnostics
+          </button>
+</div>
+</div>
+</section>
+<!-- SECTION 1: Knowledge Base Feedback States (/knowledge) -->
+<section aria-labelledby="kb-feedback-heading" class="space-y-5">
+<div class="flex items-center justify-between border-b border-outline-variant pb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-[24px]">menu_book</span>
+<h2 class="text-headline-md font-headline-md text-on-surface" id="kb-feedback-heading">1. Knowledge Base Ingestion States</h2>
+</div>
+<span class="text-label-sm font-label-sm text-secondary bg-surface-container px-2.5 py-1 rounded-md">Path: /knowledge</span>
+</div>
+<!-- Grid for Panel A, B, C -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Panel A: Save Success Modal / Toast -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div aria-hidden="true" class="absolute top-0 left-0 right-0 h-1 bg-emerald-600"></div>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-caption font-caption bg-emerald-100 text-emerald-800 font-semibold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                Published Live
+              </span>
+<span class="text-caption font-caption text-secondary">Verified Ingestion</span>
+</div>
+<!-- Simulated Toast / Banner UI inside Card -->
+<div class="bg-emerald-50 border border-emerald-200 rounded-lg p-3.5 flex items-start gap-3">
+<span class="material-symbols-outlined text-emerald-700 text-[20px] shrink-0 mt-0.5">verified_user</span>
+<div class="space-y-1">
+<p class="text-title-md font-title-md text-emerald-950">Publication Confirmed</p>
+<p class="text-body-md font-body-md text-emerald-900 leading-snug">
+                  FAQ #108 successfully published to active campus AI agent. Verified circular re-indexed in 14ms.
+                </p>
+</div>
+</div>
+<!-- Context Metadata Breakdown -->
+<div class="bg-surface-container-low rounded-lg p-3 space-y-2 border border-outline-variant/60">
+<div class="flex justify-between text-label-sm font-label-sm">
+<span class="text-secondary">Assigned Query Vector:</span>
+<span class="font-medium text-on-surface">UG-Admissions-2026</span>
+</div>
+<div class="flex justify-between text-label-sm font-label-sm">
+<span class="text-secondary">Source Document:</span>
+<span class="font-medium text-primary-container truncate max-w-[170px]">Circular_Acad_v4.2.pdf</span>
+</div>
+<div class="flex justify-between text-label-sm font-label-sm">
+<span class="text-secondary">Language Coverage:</span>
+<span class="font-medium text-on-surface">English (Default) + Hindi</span>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="pt-5 mt-4 border-t border-outline-variant flex items-center justify-between">
+<button class="text-label-md font-label-md text-error hover:underline flex items-center gap-1 font-semibold" type="button">
+<span class="material-symbols-outlined text-[16px]">undo</span>
+              Undo Publication
+            </button>
+<a class="inline-flex items-center gap-1 text-label-md font-label-md text-primary-container hover:text-primary font-semibold" href="#view-faq-108">
+<span>View Live FAQ</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Panel B: Save Failure & Conflict State -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div aria-hidden="true" class="absolute top-0 left-0 right-0 h-1 bg-error"></div>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-caption font-caption bg-error-container text-on-error-container font-semibold">
+<span class="material-symbols-outlined text-[14px]">error</span>
+                Ingestion Blocked
+              </span>
+<span class="font-mono text-caption font-caption text-secondary">REF: CODE-REF-404</span>
+</div>
+<!-- Error Banner -->
+<div class="bg-red-50 border-l-4 border-error p-3.5 rounded-r-lg space-y-1.5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-[18px]">warning</span>
+<p class="text-title-md font-title-md text-on-surface">Knowledge Sync Failed</p>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant">
+                Citation file could not be verified against registrar hash (Error CODE-REF-404). Your draft has been preserved locally.
+              </p>
+</div>
+<!-- Diagnostic Details -->
+<div class="p-3 bg-surface-container-low rounded-lg space-y-1.5 border border-outline-variant/60">
+<div class="flex items-center justify-between text-label-sm font-label-sm">
+<span class="text-secondary">Expected SHA-256:</span>
+<span class="font-mono text-caption font-caption text-on-surface">9a10fc4...c890</span>
+</div>
+<div class="flex items-center justify-between text-label-sm font-label-sm">
+<span class="text-secondary">Received Response:</span>
+<span class="font-mono text-caption font-caption text-error font-medium">404 NOT_FOUND</span>
+</div>
+<p class="text-caption font-caption text-secondary pt-1">
+                The institutional file at <code class="text-on-surface bg-surface-container px-1 py-0.5 rounded">https://registrar.college.edu/docs/</code> is currently unreachable.
+              </p>
+</div>
+</div>
+<!-- Remediation Buttons -->
+<div class="pt-5 mt-4 border-t border-outline-variant flex items-center gap-2">
+<button class="flex-1 inline-flex justify-center items-center gap-1.5 px-3 py-2 rounded-lg bg-primary-container hover:bg-primary text-on-primary text-title-md font-title-md shadow-sm transition-all duration-150" type="button">
+<span class="material-symbols-outlined text-[16px]">sync</span>
+<span>Retry Sync</span>
+</button>
+<button class="inline-flex justify-center items-center gap-1 px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low text-on-surface text-title-md font-title-md transition-colors duration-150" type="button">
+<span class="material-symbols-outlined text-[16px]">link</span>
+<span>Edit URL</span>
+</button>
+</div>
+</article>
+<!-- Panel C: Empty Knowledge Base State -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-sm flex flex-col justify-between relative">
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-caption font-caption bg-surface-container text-secondary font-medium">
+<span class="material-symbols-outlined text-[14px]">folder_off</span>
+                Uninitialized Repository
+              </span>
+<span class="text-caption font-caption text-secondary">Department #12</span>
+</div>
+<!-- Visual Empty Canvas State -->
+<div class="text-center py-6 px-4 bg-surface-container-low/60 rounded-xl border border-dashed border-outline-variant space-y-3">
+<div class="w-12 h-12 mx-auto rounded-full bg-surface-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[28px]">library_books</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-title-md font-title-md text-on-surface">No FAQs or circulars in this department yet</h3>
+<p class="text-body-md font-body-md text-secondary max-w-xs mx-auto">
+                  Seed the campus bot with verified official notices to begin answering student inquiries automatically.
+                </p>
+</div>
+</div>
+</div>
+<!-- Empty State Primaries -->
+<div class="pt-5 mt-4 border-t border-outline-variant flex flex-col sm:flex-row gap-2">
+<button class="flex-1 inline-flex justify-center items-center gap-1.5 px-3 py-2 rounded-lg bg-primary-container hover:bg-primary text-on-primary text-label-md font-label-md font-semibold transition-all duration-150" type="button">
+<span class="material-symbols-outlined text-[16px]">upload_file</span>
+<span>Upload Circular PDF</span>
+</button>
+<button class="inline-flex justify-center items-center gap-1.5 px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low text-on-surface text-label-md font-label-md font-semibold transition-colors duration-150" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+<span>+ Add First FAQ</span>
+</button>
+</div>
+</article>
+</div>
+</section>
+<!-- SECTION 2: Escalation Workflow Feedback States -->
+<section aria-labelledby="escalation-feedback-heading" class="space-y-5">
+<div class="flex items-center justify-between border-b border-outline-variant pb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-[24px]">confirmation_number</span>
+<h2 class="text-headline-md font-headline-md text-on-surface" id="escalation-feedback-heading">2. Human Escalation Workflow Statuses</h2>
+</div>
+<span class="text-label-sm font-label-sm text-secondary bg-surface-container px-2.5 py-1 rounded-md">Path: /escalations</span>
+</div>
+<!-- Grid for Panel D & Panel E -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- Panel D: Escalation Accepted (Success Confirmation) -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div aria-hidden="true" class="absolute top-0 left-0 right-0 h-1 bg-emerald-600"></div>
+<div class="space-y-5">
+<div class="flex flex-wrap items-center justify-between gap-2">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-caption font-caption bg-emerald-100 text-emerald-800 font-semibold">
+<span class="material-symbols-outlined text-[14px]">task_alt</span>
+                  Ticket Generated
+                </span>
+<span class="font-mono text-label-sm font-label-sm font-bold text-on-surface bg-surface-container px-2 py-0.5 rounded">
+                  #SN-TKT-2026-9921
+                </span>
+</div>
+<span class="text-caption font-caption text-secondary">Logged 10:42 AM IST</span>
+</div>
+<!-- Descriptive Academic Routing Narrative -->
+<div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant/80 space-y-3">
+<div class="flex items-start gap-3">
+<div class="w-9 h-9 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 shrink-0">
+<span class="material-symbols-outlined text-[20px]">mark_email_read</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-title-md font-title-md text-on-surface">Escalation Handed to Registrar</h3>
+<p class="text-body-md font-body-md text-secondary leading-relaxed">
+                    Your inquiry has been routed to the Office of the Registrar. A confirmation email has been sent to <span class="font-medium text-on-surface">student@college.edu</span>. Expected resolution: 1-2 working days.
+                  </p>
+</div>
+</div>
+<!-- Ticket Spec Attributes -->
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-3 border-t border-outline-variant/60">
+<div>
+<span class="block text-caption font-caption text-secondary">Assigned Desk</span>
+<span class="text-label-sm font-label-sm text-on-surface font-semibold">Transcript &amp; Records</span>
+</div>
+<div>
+<span class="block text-caption font-caption text-secondary">Priority Level</span>
+<span class="text-label-sm font-label-sm text-on-surface font-semibold">Standard Academic</span>
+</div>
+<div>
+<span class="block text-caption font-caption text-secondary">Estimated SLA</span>
+<span class="text-label-sm font-label-sm text-emerald-700 font-semibold">Within 48 Hours</span>
+</div>
+</div>
+</div>
+<!-- Student Instructions -->
+<div class="flex items-center gap-2 text-label-sm font-label-sm text-secondary">
+<span class="material-symbols-outlined text-[16px]">info</span>
+<span>Keep your reference number handy if contacting Dean’s Help Desk in person.</span>
+</div>
+</div>
+<!-- Actions -->
+<div class="pt-5 mt-4 border-t border-outline-variant flex items-center gap-3">
+<button class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary-container hover:bg-primary text-on-primary text-label-md font-label-md font-semibold transition-all duration-150" type="button">
+<span class="material-symbols-outlined text-[16px]">receipt_long</span>
+<span>Track Ticket</span>
+</button>
+<a class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low text-on-surface text-label-md font-label-md font-semibold transition-colors duration-150" href="#chat">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+<span>Back to Chat</span>
+</a>
+</div>
+</article>
+<!-- Panel E: Escalation Dispatch Failed (Honest Failure) -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div aria-hidden="true" class="absolute top-0 left-0 right-0 h-1 bg-error"></div>
+<div class="space-y-5">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-caption font-caption bg-error-container text-on-error-container font-semibold">
+<span class="material-symbols-outlined text-[14px]">cloud_off</span>
+                Gateway Timeout
+              </span>
+<span class="text-caption font-caption text-secondary">HTTP 504 Gateway Error</span>
+</div>
+<!-- Clear Actionable Error Copy -->
+<div class="bg-red-50 border-l-4 border-error p-4 rounded-r-xl space-y-2">
+<div class="flex items-center gap-2 text-error">
+<span class="material-symbols-outlined text-[20px]">report_problem</span>
+<h3 class="text-title-md font-title-md font-semibold text-on-surface">Escalation Submission Error</h3>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant leading-relaxed">
+                Campus ticketing server is temporarily unreachable. We did not lose your request. Click retry or contact <a class="text-primary-container underline font-medium" href="mailto:helpdesk@college.edu">helpdesk@college.edu</a> directly.
+              </p>
+</div>
+<!-- Diagnostic Cache Recovery Box -->
+<div class="bg-surface-container-low rounded-lg p-3.5 border border-outline-variant/60 space-y-2">
+<div class="flex items-center justify-between">
+<span class="text-label-sm font-label-sm text-secondary font-medium">Local Query Payload Status</span>
+<span class="text-caption font-caption text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded font-semibold">Cached in Memory</span>
+</div>
+<p class="text-caption font-caption text-secondary">
+                Payload SHA: <span class="font-mono text-on-surface">e5f881...4b29</span> • Attached Chat Transcript: 4 messages, 1 screenshot artifact preserved.
+              </p>
+</div>
+</div>
+<!-- Actions -->
+<div class="pt-5 mt-4 border-t border-outline-variant flex items-center justify-between gap-3">
+<button class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary-container hover:bg-primary text-on-primary text-label-md font-label-md font-semibold transition-all duration-150" type="button">
+<span class="material-symbols-outlined text-[16px]">sync</span>
+<span>Retry Dispatch</span>
+</button>
+<a class="inline-flex items-center gap-1.5 text-label-md font-label-md text-secondary hover:text-on-surface font-semibold" href="mailto:helpdesk@college.edu">
+<span class="material-symbols-outlined text-[16px]">mail</span>
+<span>Email Registrar Directly</span>
+</a>
+</div>
+</article>
+</div>
+</section>
+<!-- SECTION 3: Empty Conversation History State (/history) -->
+<section aria-labelledby="history-feedback-heading" class="space-y-5">
+<div class="flex items-center justify-between border-b border-outline-variant pb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-[24px]">history</span>
+<h2 class="text-headline-md font-headline-md text-on-surface" id="history-feedback-heading">3. Session &amp; Storage States</h2>
+</div>
+<span class="text-label-sm font-label-sm text-secondary bg-surface-container px-2.5 py-1 rounded-md">Path: /history</span>
+</div>
+<!-- Panel F: Empty History State -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant p-8 shadow-sm">
+<div class="max-w-2xl mx-auto text-center space-y-6">
+<!-- Architectural Privacy & Storage Icon -->
+<div class="inline-flex p-4 rounded-2xl bg-surface-container text-secondary">
+<span class="material-symbols-outlined text-[44px]">shield_person</span>
+</div>
+<div class="space-y-2">
+<h3 class="text-headline-md font-headline-md text-on-surface">No Stored Inquiries in This Session</h3>
+<p class="text-body-md font-body-md text-secondary leading-relaxed">
+              No stored inquiries found in this browser session. Previous conversations disappear when browser cache is cleared.
+            </p>
+</div>
+<!-- Browser Privacy Transparency Card -->
+<div class="bg-surface-container-low rounded-xl p-4 text-left border border-outline-variant flex items-start gap-3.5">
+<span class="material-symbols-outlined text-primary-container text-[22px] shrink-0 mt-0.5">lock</span>
+<div class="space-y-1 text-label-sm font-label-sm">
+<p class="font-semibold text-on-surface">Student Data Sovereignty Notice</p>
+<p class="text-secondary font-normal">
+                To guarantee zero cross-device tracking on campus terminals, SawaalNow does not store your questions on central servers unless an explicit escalation ticket is generated.
+              </p>
+</div>
+</div>
+<!-- Primary Flow Re-entry -->
+<div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+<a class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-primary-container hover:bg-primary text-on-primary text-title-md font-title-md shadow-sm transition-all duration-150" href="#new-chat">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+<span>Start New Inquiry</span>
+</a>
+<button class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low text-on-surface text-label-md font-label-md font-medium transition-colors duration-150" type="button">
+<span class="material-symbols-outlined text-[18px]">cached</span>
+<span>Check Previous Terminals</span>
+</button>
+</div>
+</div>
+</article>
+</section>
+</main>
+<!-- Civic Campus Footer -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant py-8 mt-12">
+<div class="max-w-7xl mx-auto px-4 md:px-8 flex flex-col md:flex-row justify-between items-center gap-4 text-label-sm font-label-sm text-secondary">
+<div class="flex items-center gap-3">
+<span class="font-bold text-on-surface">SawaalNow Campus AI</span>
+<span>•</span>
+<span>Institutional Knowledge Verification Engine v2.4</span>
+</div>
+<div class="flex items-center gap-6">
+<a class="hover:text-on-surface hover:underline" href="#privacy">Privacy Charter</a>
+<a class="hover:text-on-surface hover:underline" href="#registrar">Registrar Portal</a>
+<a class="hover:text-on-surface hover:underline" href="#help">Emergency Helpdesk</a>
+<span class="inline-flex items-center gap-1 text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+          WCAG 2.1 AAA Validated
+        </span>
+</div>
+</div>
+</footer>
+</body></html>
