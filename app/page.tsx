@@ -1,27 +1,35 @@
 "use client";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import kb from "@/data/circulars.json";
 
-type Src = { id: string; title: string; date: string } | null;
-type Item = { q: string; loading?: boolean; error?: string; found?: boolean; answer?: string; lang?: string; source?: Src; sms?: string; ticket?: string };
+type Src = { id: string; title: string; date: string; text: string } | null;
+type Msg =
+  | { id: number; role: "me"; text: string }
+  | { id: number; role: "bot"; loading?: boolean; error?: boolean; found?: boolean; answer?: string; lang?: string; source?: Src; q: string; sms?: string; open?: boolean; fb?: "up" | "down"; ticket?: string };
 
 const LANGS: [string, string][] = [["", "Auto"], ["hi-IN", "हिन्दी"], ["en-IN", "English"], ["bn-IN", "বাংলা"], ["ta-IN", "தமிழ்"], ["te-IN", "తెలుగు"], ["mr-IN", "मराठी"], ["gu-IN", "ગુજરાતી"], ["kn-IN", "ಕನ್ನಡ"], ["ml-IN", "മലയാളം"], ["pa-IN", "ਪੰਜਾਬੀ"]];
-const CHIPS: [string, string][] = [["📝", "Exam form last date?"], ["🎓", "Scholarship ke liye kaun se documents chahiye?"], ["💰", "Fees kab tak bharni hai?"], ["🏠", "Hostel list kab aayegi?"]];
+const TOPICS: [string, string][] = [["🎓 Admissions", "What documents are required for UG admission?"], ["🕒 Office hours", "कॉलेज के कार्यालय का समय क्या है?"], ["💰 Fees", "Fees kab tak bharni hai?"], ["🏠 Hostel", "Hostel list kab aayegi?"], ["📝 Exams", "Exam form last date?"], ["📚 Library", "Library kab tak khuli rehti hai?"]];
+const DEPTS = ["Registrar Office", "Accounts / Fees", "Hostel Warden Office", "Examination Cell"];
 
+let nid = 1;
 export default function Home() {
   const [lang, setLang] = useState("");
   const [q, setQ] = useState("");
-  const [items, setItems] = useState<Item[]>([]);
+  const [msgs, setMsgs] = useState<Msg[]>([]);
   const [busy, setBusy] = useState(false);
   const [listening, setListening] = useState(false);
+  const [esc, setEsc] = useState<number | null>(null);
+  const [f, setF] = useState({ name: "", phone: "", dept: DEPTS[0], details: "", consent: false });
+  const [ferr, setFerr] = useState("");
   const rec = useRef<any>(null);
-  const [form, setForm] = useState<Record<number, { name: string; phone: string; err?: boolean }>>({});
+  const end = useRef<HTMLDivElement>(null);
+  useEffect(() => { end.current?.scrollIntoView({ behavior: "smooth", block: "end" }); }, [msgs]);
 
   const tl = () => lang || (typeof navigator !== "undefined" ? navigator.language : "en-IN");
-  const patch = (i: number, p: Partial<Item>) => setItems((s) => s.map((x, j) => (j === i ? { ...x, ...p } : x)));
+  const patch = (id: number, p: any) => setMsgs((s) => s.map((m) => (m.id === id ? ({ ...m, ...p } as Msg) : m)));
 
   function speak(text: string, l?: string) {
-    if (typeof window === "undefined" || !window.speechSynthesis) return;
+    if (!window.speechSynthesis) return;
     window.speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
     u.lang = l || tl();
@@ -34,17 +42,16 @@ export default function Home() {
     if (!question || busy) return;
     setQ("");
     setBusy(true);
-    setItems((s) => [{ q: question, loading: true }, ...s]);
-    // newest item is always index 0; keep other indexes stable by shifting form state
-    setForm((f) => Object.fromEntries(Object.entries(f).map(([k, v]) => [Number(k) + 1, v])));
+    const id = nid++;
+    setMsgs((s) => [...s, { id: nid++, role: "me", text: question }, { id, role: "bot", loading: true, q: question }]);
     try {
       const r = await fetch("/api/ask", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ question }) });
       if (!r.ok) throw new Error();
       const o = await r.json();
-      patch(0, { loading: false, ...o });
+      patch(id, { loading: false, ...o });
       if (o.found) speak(o.answer, o.lang);
     } catch {
-      patch(0, { loading: false, error: "Something went wrong. Please try again." });
+      patch(id, { loading: false, error: true });
     }
     setBusy(false);
   }
@@ -62,73 +69,126 @@ export default function Home() {
     r.start();
   }
 
-  async function sendHandoff(i: number) {
-    const f = form[i] || { name: "", phone: "" };
-    const r = await fetch("/api/handoff", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: f.name, phone: f.phone, question: items[i].q }) });
-    if (!r.ok) return setForm({ ...form, [i]: { ...f, err: true } });
+  async function submitEsc() {
+    const m = msgs.find((x) => x.id === esc);
+    if (!m || m.role !== "bot") return;
+    if (!f.name.trim() || f.phone.replace(/\D/g, "").length < 10) return setFerr("Please enter your name and a 10-digit phone number.");
+    if (!f.consent) return setFerr("Please tick the consent box.");
+    const r = await fetch("/api/handoff", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: f.name, phone: f.phone, question: m.q, dept: f.dept, details: f.details }) });
+    if (!r.ok) return setFerr("Could not create the ticket. Please try again.");
     const { ticket } = await r.json();
-    patch(i, { ticket: `Ticket ${ticket} created for ${f.name}. A customer executive will call ${f.phone}.` });
+    patch(m.id, { ticket: `Ticket ${ticket} sent to ${f.dept}. They will call ${f.phone}.` });
+    setEsc(null); setFerr("");
   }
 
+  const escMsg = msgs.find((x) => x.id === esc);
+
   return (
-    <main>
-      <h1>💬 SawaalNow</h1>
-      <p className="sub">Ask in your own language. Speak or type. College helpdesk demo.</p>
-      <div className="row">
-        <label htmlFor="lang" className="lbl" style={{ margin: 0 }}>Language</label>
-        <select id="lang" value={lang} onChange={(e) => setLang(e.target.value)}>
+    <>
+      <header className="hdr">
+        <span className="logo">SawaalNow</span>
+        <span className="pill">College Helpdesk Demo</span>
+        <span className="sp" />
+        <select className="sel" aria-label="Language" value={lang} onChange={(e) => setLang(e.target.value)}>
           {LANGS.map(([v, n]) => <option key={v} value={v}>{n}</option>)}
         </select>
-      </div>
-      <div className="row" style={{ marginTop: 12, flexWrap: "nowrap" }}>
-        <button className={"mic" + (listening ? " on" : "")} onClick={toggleMic} aria-label="Speak your question">🎤</button>
-        <textarea value={q} onChange={(e) => setQ(e.target.value)} placeholder="अपना सवाल यहाँ लिखें / Type your question" aria-label="Your question"
-          onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); ask(); } }} />
-      </div>
-      <div className="row" style={{ marginTop: 8 }}>
-        <button style={{ flex: 1 }} disabled={busy} onClick={() => ask()}>Ask ➤</button>
-      </div>
-      <div className="chips">
-        {CHIPS.map(([e, t]) => <button key={t} className="chip" onClick={() => ask(t)}>{e} {t}</button>)}
-      </div>
+      </header>
+      <div className="layout">
+        <aside className="side">
+          <h4>TOPICS</h4>
+          {TOPICS.map(([t, qq]) => <button key={t} className="nav" onClick={() => ask(qq)}>{t}</button>)}
+          <div className="vbox"><b>{kb.length}</b> verified circulars loaded. Answers come only from these.</div>
+        </aside>
+        <main className="main">
+          <div className="wrap">
+            <div className="card">
+              <span className="demo">Demo environment: sample college data</span>
+              <h1>Ask anything about your college</h1>
+              <p>Answers come strictly from approved circulars. If it can’t be verified, a human takes over. Ask in any language, by voice or text.</p>
+              <div className="chips">{TOPICS.slice(0, 3).map(([, qq]) => <button key={qq} className="chip" onClick={() => ask(qq)}>{qq}</button>)}</div>
+            </div>
 
-      {items.map((it, i) => (
-        <div className="card" key={items.length - i}>
-          <p className="q">{it.q}</p>
-          {it.loading && <p>…</p>}
-          {it.error && <p className="warn">{it.error}</p>}
-          {it.answer && (
-            <>
-              <p className="a">{it.answer}</p>
-              <div className="row">
-                <button onClick={() => speak(it.answer!, it.lang)}>🔊 Listen</button>
-                <button className="sec" aria-label="Stop" onClick={() => window.speechSynthesis.cancel()}>🔇</button>
-                {it.found && it.source && <span className="src">✔ Verified: {it.source.title} · {it.source.date}</span>}
-                {it.found && <button className="sec" disabled={!!it.sms} onClick={() => patch(i, { sms: (it.answer + " -SawaalNow").slice(0, 160) })}>📱 SMS</button>}
-              </div>
-              {it.sms && <div className="box">SMS sent to your registered number (simulated): {it.sms}</div>}
-              {!it.found && !it.error && (
-                <div className="box">
-                  {it.ticket ? it.ticket : (
+            {msgs.map((m) =>
+              m.role === "me" ? (
+                <div className="me" key={m.id}><span>{m.text}</span></div>
+              ) : (
+                <div className={"bot" + (m.found || m.loading || m.error ? "" : " nv")} key={m.id}>
+                  <div className="bh">
+                    <span className="av">SN</span>SawaalNow Helpdesk Agent
+                    {!m.loading && !m.error && <span className="badge">{m.found ? "✔ Verified" : "⚠ Not verified"}</span>}
+                  </div>
+                  {m.loading && <p className="dots">Searching verified circulars…</p>}
+                  {m.error && <p className="err">Something went wrong. Please try again.</p>}
+                  {m.answer && (
                     <>
-                      <label className="lbl">Name</label>
-                      <input value={form[i]?.name ?? ""} onChange={(e) => setForm({ ...form, [i]: { ...form[i], name: e.target.value, phone: form[i]?.phone ?? "" } })} />
-                      <label className="lbl">Phone</label>
-                      <input inputMode="tel" style={form[i]?.err ? { borderColor: "var(--warn)" } : undefined} value={form[i]?.phone ?? ""} onChange={(e) => setForm({ ...form, [i]: { name: form[i]?.name ?? "", phone: e.target.value } })} />
-                      <div className="row" style={{ marginTop: 10 }}><button onClick={() => sendHandoff(i)}>👤 Send to a human</button></div>
+                      <p className="ans">{m.answer}</p>
+                      {m.found && m.source && (
+                        <div className="src">
+                          Source: {m.source.title} ({m.source.date}){" "}
+                          <button onClick={() => patch(m.id, { open: !m.open })}>{m.open ? "Hide excerpt ▲" : "View excerpt ▼"}</button>
+                          {m.open && <p className="ex">{m.source.text}</p>}
+                        </div>
+                      )}
+                      <div className="acts">
+                        <button className="btn" onClick={() => speak(m.answer!, m.lang)}>🔊 Listen</button>
+                        <button className="btn" aria-label="Stop" onClick={() => window.speechSynthesis.cancel()}>🔇</button>
+                        {m.found && <button className="btn" disabled={!!m.sms} onClick={() => patch(m.id, { sms: (m.answer + " -SawaalNow").slice(0, 160) })}>📱 SMS</button>}
+                        {!m.found && !m.ticket && <button className="btn p" onClick={() => { setEsc(m.id); setFerr(""); }}>Escalate to a human</button>}
+                      </div>
+                      {m.sms && <div className="sms">SMS sent to your registered number (simulated): {m.sms}</div>}
+                      {m.ticket && <div className="ok">{m.ticket}</div>}
+                      {m.found && (
+                        <div className="fb">Was this helpful?
+                          <button disabled={!!m.fb} onClick={() => patch(m.id, { fb: "up" })}>{m.fb === "up" ? "👍 Thanks" : "👍"}</button>
+                          <button disabled={!!m.fb} onClick={() => patch(m.id, { fb: "down" })}>{m.fb === "down" ? "👎 Noted" : "👎"}</button>
+                        </div>
+                      )}
                     </>
                   )}
                 </div>
-              )}
-            </>
-          )}
-        </div>
-      ))}
+              )
+            )}
+            <div ref={end} />
+          </div>
+        </main>
+      </div>
 
-      <details>
-        <summary>Verified circulars the agent is allowed to use (sample data)</summary>
-        {kb.map((c) => <p key={c.id}>{c.id} · {c.title} ({c.date}): {c.text}</p>)}
-      </details>
-    </main>
+      <div className="bar">
+        <div className="in">
+          <div className="box">
+            <textarea value={q} maxLength={500} onChange={(e) => setQ(e.target.value)} aria-label="Your question" placeholder="Ask your question in English, Hindi, or Hinglish…"
+              onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); ask(); } }} />
+            <div className="r">
+              <button className={"mic" + (listening ? " on" : "")} aria-label="Speak your question" onClick={toggleMic}>🎤</button>
+              <span style={{ fontSize: 12, color: "var(--mut)" }}>{q.length} / 500</span>
+              <button className="btn p" disabled={busy || !q.trim()} onClick={() => ask()}>Send ➤</button>
+            </div>
+          </div>
+          <div className="foot">AI answers are grounded in the approved circulars only.</div>
+        </div>
+      </div>
+
+      {esc !== null && escMsg && escMsg.role === "bot" && (
+        <div className="ov" onClick={() => setEsc(null)}>
+          <div className="sheet" onClick={(e) => e.stopPropagation()}>
+            <h2>Request human help</h2>
+            <p style={{ margin: 0, color: "var(--mut)" }}>Your unresolved question will be sent to the college office.</p>
+            <label className="lbl">Your question</label>
+            <div className="qq">“{escMsg.q}”</div>
+            <label className="lbl">Name</label>
+            <input className="fld" value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} />
+            <label className="lbl">Phone</label>
+            <input className="fld" inputMode="tel" value={f.phone} onChange={(e) => setF({ ...f, phone: e.target.value })} />
+            <label className="lbl">Department desk</label>
+            <select className="fld" value={f.dept} onChange={(e) => setF({ ...f, dept: e.target.value })}>{DEPTS.map((d) => <option key={d}>{d}</option>)}</select>
+            <label className="lbl">Additional details (optional)</label>
+            <textarea className="fld" rows={2} value={f.details} onChange={(e) => setF({ ...f, details: e.target.value })} />
+            <label className="chk"><input type="checkbox" checked={f.consent} onChange={(e) => setF({ ...f, consent: e.target.checked })} />I agree to share my question and phone number with the office to resolve this ticket.</label>
+            {ferr && <p className="err">{ferr}</p>}
+            <div className="acts"><button className="btn" onClick={() => setEsc(null)}>Cancel</button><button className="btn p" style={{ flex: 1 }} onClick={submitEsc}>Submit ticket</button></div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

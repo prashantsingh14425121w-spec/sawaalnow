@@ -31,7 +31,7 @@ export async function POST(req: Request) {
       found,
       answer: o.answer || "Mujhe is sawaal ka jawab nahi mila. Main ise ek insaan ko bhej raha hoon.",
       lang: o.lang || "hi-IN",
-      source: found && src ? { id: src.id, title: src.title, date: src.date } : null,
+      source: found && src ? { id: src.id, title: src.title, date: src.date, text: src.text } : null,
     });
   } catch (e) {
     return NextResponse.json({ error: "upstream" }, { status: 502 });
