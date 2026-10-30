@@ -19,7 +19,7 @@ export async function POST(req: Request) {
   } catch {}
   if (!q) return NextResponse.json({ error: "empty" }, { status: 400 });
 
-  const docs = kb.map((k) => `${k.id} | ${k.title} | ${k.date} | ${k.text}`).join("\n");
+  const docs = kb.map((k) => `${k.id} | ${k.category} | ${k.title} | ${k.date} | ${k.text}`).join("\n");
   try {
     const raw = await gemini(SYSTEM, `CIRCULARS:\n${docs}\n\nUSER QUESTION: ${q}`);
     let o: { found?: boolean; answer?: string; lang?: string; source?: string | null };

@@ -238,7 +238,7 @@
 <div class="p-3 bg-surface-container-lowest rounded-lg border border-surface-variant elevation-1">
 <div class="flex items-center justify-between text-on-surface font-medium mb-1">
 <span>Verified Sources</span>
-<span class="text-primary font-semibold">9 Synced</span>
+<span class="text-primary font-semibold" id="kb-count">21 Synced</span>
 </div>
 <p class="text-caption leading-relaxed text-on-surface-variant">College Ordinance v2025.2, Examination By-laws §12, Hostel Rulebook 2026.</p>
 </div>
@@ -590,6 +590,40 @@
   window.addEventListener('click', function (e) {
     var b = $('lang-btn'), m = $('lang-menu');
     if (b && m && !b.contains(e.target) && !m.contains(e.target)) m.classList.add('hidden');
+  });
+
+  /* ---- Sidebar portals: show the circulars of each portal ---- */
+  var ACT = 'bg-secondary-container text-primary font-semibold'.split(' ');
+  var INACT = 'text-on-surface-variant font-medium hover:bg-surface-container-low hover:text-on-surface'.split(' ');
+  var PORTALS = { admissions: 'Admissions & Fees', calendar: 'Academic Calendar', hostel: 'Hostel & Housing', exams: 'Examinations', registrar: 'Registrar Escalation' };
+  var KB = [];
+  fetch('/api/circulars').then(function (r) { return r.json(); }).then(function (a) {
+    KB = a; var c = $('kb-count'); if (c) c.innerText = a.length + ' Synced';
+  }).catch(function () {});
+  function portalCard(key) {
+    var list = KB.filter(function (k) { return k.category === key; });
+    var d = document.createElement('div'); d.id = 'portal-card'; d.className = 'flex flex-col items-start';
+    var rows = list.map(function (k) {
+      return '<div class="p-3 rounded-lg border border-surface-variant bg-surface-container-low"><div class="flex items-center justify-between gap-2"><span class="font-label-md text-label-md text-on-surface font-semibold">' + esc(k.title) + '</span><span class="text-caption font-caption text-outline">' + esc(k.date) + '</span></div><p class="text-caption font-caption text-on-surface-variant mt-1 leading-relaxed">' + esc(k.text) + '</p><button class="portal-ask mt-2 inline-flex items-center gap-1 text-primary hover:underline font-label-sm text-label-sm font-semibold" data-q="' + esc(k.title) + '"><span>Ask about this</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span></button></div>';
+    }).join('');
+    if (!list.length) rows = '<p class="text-caption text-tertiary">Loading circulars...</p>';
+    var esc2 = key === 'registrar' ? '<div class="mt-4 pt-3 border-t border-surface-variant"><button id="portal-esc" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary-container hover:bg-[#144FB8] text-white font-label-md text-label-md font-semibold elevation-1 transition-colors"><span class="material-symbols-outlined text-[18px]">support_agent</span><span>Escalate to Registrar Desk</span></button></div>' : '';
+    d.innerHTML = '<div class="max-w-[95%] sm:max-w-[85%] w-full bg-surface-container-lowest border border-surface-variant rounded-xl rounded-bl-[4px] p-4 sm:p-5 elevation-1"><div class="flex items-center justify-between pb-3 mb-3 border-b border-surface-variant"><div class="flex items-center gap-2"><div class="w-6 h-6 rounded bg-primary-container text-white flex items-center justify-center font-bold text-caption">SN</div><span class="font-title-md text-title-md text-on-surface">' + esc(PORTALS[key]) + '</span></div><span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-caption font-caption bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold"><span class="material-symbols-outlined text-[15px] text-emerald-700">verified</span><span>' + list.length + ' verified circulars</span></span></div><div class="space-y-2">' + rows + '</div>' + esc2 + '</div>';
+    d.querySelectorAll('.portal-ask').forEach(function (b) { b.onclick = function () { window.sendMessage('Tell me about: ' + b.getAttribute('data-q')); }; });
+    var pe = d.querySelector('#portal-esc'); if (pe) pe.onclick = function () { window.openEscalationModal(pe, 'General query for the Registrar Desk'); };
+    return d;
+  }
+  document.querySelectorAll('nav[aria-label="Campus Sections"] a').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      var key = a.getAttribute('href').replace('#', '');
+      document.querySelectorAll('nav[aria-label="Campus Sections"] a').forEach(function (x) { ACT.concat(INACT).forEach(function (c) { x.classList.remove(c); }); (x === a ? ACT : INACT).forEach(function (c) { x.classList.add(c); }); });
+      var old = $('portal-card'); if (old) old.remove();
+      var stream = $('chat-stream');
+      stream.insertBefore(portalCard(key), $('loading-state'));
+      if (!KB.length) fetch('/api/circulars').then(function (r) { return r.json(); }).then(function (x) { KB = x; var o = $('portal-card'); if (o) o.replaceWith(portalCard(key)); });
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    });
   });
 })();
 </script>

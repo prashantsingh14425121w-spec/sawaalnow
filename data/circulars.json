@@ -3,54 +3,147 @@
   "id": "C1",
   "title": "Exam form submission",
   "date": "12 Oct 2026",
-  "text": "Semester exam forms must be filled online on the college portal between 1 and 15 November 2026. Late forms are accepted until 20 November with a fine of Rs 500."
+  "text": "Semester exam forms must be filled online on the college portal between 1 and 15 November 2026. Late forms are accepted until 20 November with a fine of Rs 500.",
+  "category": "exams"
  },
  {
   "id": "C2",
   "title": "Scholarship application",
   "date": "5 Oct 2026",
-  "text": "The state post-matric scholarship form is open until 30 November 2026. Required documents: income certificate, Aadhaar, previous marksheet, bank passbook copy. Submit at Room 12, Accounts Office, 10 am to 4 pm."
+  "text": "The state post-matric scholarship form is open until 30 November 2026. Required documents: income certificate, Aadhaar, previous marksheet, bank passbook copy. Submit at Room 12, Accounts Office, 10 am to 4 pm.",
+  "category": "admissions"
  },
  {
   "id": "C3",
   "title": "Fee payment",
   "date": "1 Oct 2026",
-  "text": "Semester fee can be paid online or at the bank counter by 10 November 2026. Fee in instalments is allowed only with a written request to the Principal."
+  "text": "Semester fee can be paid online or at the bank counter by 10 November 2026. Fee in instalments is allowed only with a written request to the Principal.",
+  "category": "admissions"
  },
  {
   "id": "C4",
   "title": "Hostel allotment",
   "date": "8 Oct 2026",
-  "text": "Hostel forms are available at the warden office. Last date is 25 October 2026. The merit list will be put up on 2 November 2026."
+  "text": "Hostel forms are available at the warden office. Last date is 25 October 2026. The merit list will be put up on 2 November 2026.",
+  "category": "hostel"
  },
  {
   "id": "C5",
   "title": "ID card and bonafide certificate",
   "date": "14 Sep 2026",
-  "text": "New ID cards are issued at the Admin Office in 3 working days. A bonafide certificate needs a form signed by the class coordinator and takes 2 working days."
+  "text": "New ID cards are issued at the Admin Office in 3 working days. A bonafide certificate needs a form signed by the class coordinator and takes 2 working days.",
+  "category": "registrar"
  },
  {
   "id": "C6",
   "title": "Re-evaluation",
   "date": "20 Oct 2026",
-  "text": "Re-evaluation requests must be made within 7 days of result declaration. Fee is Rs 300 per paper. Apply on the exam portal under Re-evaluation."
+  "text": "Re-evaluation requests must be made within 7 days of result declaration. Fee is Rs 300 per paper. Apply on the exam portal under Re-evaluation.",
+  "category": "exams"
  },
  {
   "id": "C7",
   "title": "Library",
   "date": "2 Sep 2026",
-  "text": "Library is open 9 am to 6 pm, Monday to Saturday. Each student can borrow 3 books for 14 days. Late fine is Rs 2 per day."
+  "text": "Library is open 9 am to 6 pm, Monday to Saturday. Each student can borrow 3 books for 14 days. Late fine is Rs 2 per day.",
+  "category": "registrar"
  },
  {
   "id": "C8",
   "title": "UG admission documents",
   "date": "3 Aug 2026",
-  "text": "For UG admission, bring original and two self-attested copies of: Class 10 and Class 12 marksheets, Transfer Certificate, Migration Certificate (for non-state board students), Category certificate if applicable, and 4 passport-size photographs."
+  "text": "For UG admission, bring original and two self-attested copies of: Class 10 and Class 12 marksheets, Transfer Certificate, Migration Certificate (for non-state board students), Category certificate if applicable, and 4 passport-size photographs.",
+  "category": "admissions"
  },
  {
   "id": "C9",
   "title": "Office timings",
   "date": "1 Aug 2026",
-  "text": "Administrative office is open Monday to Friday, 9:00 am to 5:00 pm. Cashier counter is open 10 am to 3:30 pm. Lunch break is 1:00 pm to 2:00 pm. Office is closed on Saturday and Sunday."
+  "text": "Administrative office is open Monday to Friday, 9:00 am to 5:00 pm. Cashier counter is open 10 am to 3:30 pm. Lunch break is 1:00 pm to 2:00 pm. Office is closed on Saturday and Sunday.",
+  "category": "registrar"
+ },
+ {
+  "id": "C10",
+  "category": "admissions",
+  "title": "Fee structure (UG)",
+  "date": "2 Aug 2026",
+  "text": "Tuition fee for UG programs is Rs 45,000 per semester. Exam fee is Rs 1,500 and development fee is Rs 3,000 per semester."
+ },
+ {
+  "id": "C11",
+  "category": "admissions",
+  "title": "Admission counselling",
+  "date": "28 Jul 2026",
+  "text": "Provisional admission counselling is on 5 to 7 August 2026 at the Admin Block. Seat acceptance fee is Rs 10,000 and is adjusted in the first semester fee."
+ },
+ {
+  "id": "C12",
+  "category": "calendar",
+  "title": "Semester dates",
+  "date": "25 Jul 2026",
+  "text": "Odd semester classes run from 3 August to 20 November 2026. Mid-semester tests are from 21 to 26 September 2026. Even semester begins on 4 January 2027."
+ },
+ {
+  "id": "C13",
+  "category": "calendar",
+  "title": "Holidays",
+  "date": "1 Aug 2026",
+  "text": "College holidays: Dussehra on 20 October 2026, Diwali break from 8 to 12 November 2026, Christmas on 25 December 2026, Republic Day on 26 January 2027."
+ },
+ {
+  "id": "C14",
+  "category": "calendar",
+  "title": "End-semester exam schedule",
+  "date": "15 Oct 2026",
+  "text": "End-semester exams start on 1 December 2026. The datesheet will be on the exam portal by 20 November 2026. Admit cards are available 5 days before the first exam."
+ },
+ {
+  "id": "C15",
+  "category": "hostel",
+  "title": "Hostel and mess fees",
+  "date": "10 Aug 2026",
+  "text": "Hostel fee is Rs 38,000 per year, payable in two instalments. Mess charges are Rs 3,200 per month."
+ },
+ {
+  "id": "C16",
+  "category": "hostel",
+  "title": "Hostel rules",
+  "date": "10 Aug 2026",
+  "text": "Hostel gate closes at 10 pm. Visitors are allowed on Sunday from 4 pm to 6 pm in the visitor room only. Overnight outside guests are not allowed."
+ },
+ {
+  "id": "C17",
+  "category": "hostel",
+  "title": "Local guardian rule",
+  "date": "10 Aug 2026",
+  "text": "Students whose local guardian lives within 25 km of campus are normally treated as day scholars. Any exemption can be granted only by the Chief Warden."
+ },
+ {
+  "id": "C18",
+  "category": "exams",
+  "title": "Supplementary exam",
+  "date": "18 Oct 2026",
+  "text": "Supplementary exam forms are open from 10 to 20 January 2027. Fee is Rs 800 per paper. Apply on the exam portal."
+ },
+ {
+  "id": "C19",
+  "category": "exams",
+  "title": "Exam rules and attendance",
+  "date": "15 Oct 2026",
+  "text": "Carry your college ID card and admit card to every exam. Mobile phones are not allowed in the hall. 75 percent attendance is required to sit the exam. With a medical certificate, the minimum is 65 percent."
+ },
+ {
+  "id": "C20",
+  "category": "registrar",
+  "title": "Helpdesk contact",
+  "date": "1 Aug 2026",
+  "text": "Helpdesk is at Admin Block, Room 4, open Monday to Friday, 9 am to 5 pm. Email: helpdesk@college.example. Phone: 0612-000000. These are demo contact details."
+ },
+ {
+  "id": "C21",
+  "category": "registrar",
+  "title": "Grievance process",
+  "date": "1 Aug 2026",
+  "text": "Submit the grievance form at the Registrar Office or on the portal. The office replies within 5 working days."
  }
 ]
